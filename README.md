@@ -1,3 +1,35 @@
+<h1 align="center">Voicecode: Revolutionizing Accessible Coding</h1><br>
+
+<p align="center">
+Voice-Activated Code Generation, Debugging, and Visualization for Seamless Programming.
+</p><br>
+
+<p align="center">
+  <a href="#"><img alt="Android OS" src="https://img.shields.io/badge/OS-Android-3DDC84?style=flat-square&logo=android"></a>
+  <a href="#"><img alt="Languages-Kotlin" src="https://flat.badgen.net/badge/Language/Kotlin?icon=https://raw.githubusercontent.com/binaryshrey/Awesome-Android-Open-Source-Projects/master/assets/Kotlin_Logo_icon_white.svg&color=f18e33"/></a>
+  <a href="#"><img alt="Languages-Java" src="https://img.shields.io/badge/Language-Java-1DA1F2?style=flat-square&logo=java"></a>
+    <a href="#"><img alt="OpenSource" src="https://flat.badgen.net/badge/Open-Source/HacktoberFest?icon=https://raw.githubusercontent.com/binaryshrey/Awesome-Android-Open-Source-Projects/master/assets/DO_Logo_icon_white.svg&color=f18e33"/></a>
+  <a href="#"><img alt="PRs" src="https://img.shields.io/badge/PRs-Welcome-3DDC84?style=flat-square"></a>
+</p>
+<p align="center">
+  <a href="https://github.com/myudak"><img alt="Github - myudak" src="https://img.shields.io/badge/GitHub-myudak-181717?style=flat-square&logo=github"></a>
+  <a href="https://linkedin.com/myudak"><img alt="Linkedin - myudak" src="https://img.shields.io/badge/Linkedin-myudak-1DA1F2?style=flat-square&logo=linkedin"></a>
+</p>
+
+<br>
+<p align="center">
+<img width="720px" src="https://github.com/Rivaan-P/Voicecode-web/assets/69108782/2104bca4-b012-4737-a66d-78344f833900" alt="allymotion"></img>
+</p><br>
+
+### TEAM
+
+- MUCHAMAD YUDA TRI ANANDA
+- anonis
+- x
+
+</p><br>
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
