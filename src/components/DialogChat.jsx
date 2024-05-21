@@ -19,6 +19,9 @@ const ChatDialog = () => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSubmit(e);
+    } else if (e.key === "Enter" && e.shiftKey) {
+      // Insert a new line
+      setInputValue(inputValue + "\n");
     }
   };
 

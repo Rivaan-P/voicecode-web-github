@@ -1,4 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import ReactMarkdown from "react-markdown";
 
 const ChatMessage = ({ text, sender }) => {
   return (
@@ -11,7 +12,10 @@ const ChatMessage = ({ text, sender }) => {
         <AvatarImage src="https://github.com/shadcn.png" alt={sender} />
         <AvatarFallback>A</AvatarFallback>
       </Avatar>
-      <span className="text-gray-800 text-base leading-relaxed">{text}</span>
+      {/* <span className="text-gray-800 text-base leading-relaxed">{text}</span> */}
+      <ReactMarkdown className="text-gray-800 text-base leading-relaxed">
+        {text}
+      </ReactMarkdown>
     </div>
   );
 };
