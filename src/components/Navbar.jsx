@@ -8,12 +8,12 @@ import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 backdrop-blur-lg  shadow-sm ">
+    <nav className="sticky inset-x-0 top-0 z-50 backdrop-blur-lg  shadow-sm ">
       <div className="w-full max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-14 items-center">
           <Link className="flex items-center" href="#">
             <MountainIcon className="h-6 w-6" />
-            <span className="sr-only">Acme Inc</span>
+            <span className="sr-only">VoiceCode</span>
           </Link>
           <nav className="hidden md:flex gap-4">
             <Link

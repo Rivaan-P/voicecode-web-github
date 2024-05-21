@@ -1,5 +1,5 @@
 "use client";
-// ChatWindow.js
+
 import { Input } from "@/components/ui/input";
 import { Separator } from "./ui/separator";
 import { Textarea } from "@/components/ui/textarea";

@@ -113,3 +113,7 @@ body {
   align-items: center;
   height: 100vh;
 }
+
+.resize-chat {
+  height: calc(100vh - 3.5rem) !important;
+}
