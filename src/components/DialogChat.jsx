@@ -13,14 +13,6 @@ const ChatDialog = () => {
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
-    if (e.keyCode == 13 && e.shiftKey == false) {
-      e.preventDefault();
-      if (inputValue.trim()) {
-        setMessages([...messages, { text: inputValue, sender: "user" }]);
-        // Call your API or handle the user's input here
-        setInputValue("");
-      }
-    }
   };
 
   const handleKeyDown = (e) => {

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import ChatDialog from "@/components/DialogChat";
 import Navbar from "@/components/Navbar";
 
