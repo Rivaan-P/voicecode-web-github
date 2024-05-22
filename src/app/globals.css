@@ -95,6 +95,8 @@ body {
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 1.5rem;
+
+  /* overflow-y: hidden; */
 }
 
 .chat-message.user {
@@ -116,4 +118,33 @@ body {
 
 .resize-chat {
   height: calc(100vh - 3.5rem) !important;
+}
+
+.textmd p {
+  overflow-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.textmd code {
+  color: rgb(171, 178, 191);
+  font-family: "Fira Code", "Fira Mono", Menlo, Consolas, "DejaVu Sans Mono",
+    monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+  tab-size: 2;
+  hyphens: none;
+  padding: 1em;
+  margin: 0.5em 0px;
+  overflow: auto;
+  border-radius: 0.3em;
+
+  overflow-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }

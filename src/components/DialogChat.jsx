@@ -5,6 +5,8 @@ import { Separator } from "./ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 
+import { AutosizeTextarea } from "@/components/ui/autosize-textarea";
+
 import ChatMessage from "./ChatMessage";
 
 const ChatDialog = () => {
@@ -47,7 +49,10 @@ const ChatDialog = () => {
       </div>
       <Separator className="my-4" />
       <form onSubmit={handleSubmit}>
-        <Textarea
+        <AutosizeTextarea
+          maxHeight={200}
+          name="message"
+          autoComplete="off"
           value={inputValue}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}

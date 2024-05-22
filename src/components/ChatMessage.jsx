@@ -39,10 +39,10 @@ const ChatMessage = ({ text, sender }) => {
                   },
                 });
               }}
-              className="cursor-pointer"
+              className=" cursor-pointer"
             >
               <div
-                className={`chat-message flex items-center items-start gap-2 ${
+                className={` grid grid-col-1 gap-2.5 [&_>_*]:min-w-0 chat-message flex items-center items-start gap-2 ${
                   sender === "user" ? "user" : "assistant"
                 }`}
               >
@@ -54,7 +54,8 @@ const ChatMessage = ({ text, sender }) => {
                   <AvatarFallback>A</AvatarFallback>
                 </Avatar>
                 {/* <span className="text-gray-800 text-base leading-relaxed">{text}</span> */}
-                <ReactMarkdown className=" text-base leading-relaxed">
+
+                <ReactMarkdown className="textmd text-base leading-relaxed">
                   {text}
                 </ReactMarkdown>
               </div>
