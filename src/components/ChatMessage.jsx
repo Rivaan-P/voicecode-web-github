@@ -4,47 +4,111 @@ import ReactMarkdown from "react-markdown";
 import { toast } from "sonner";
 
 import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
 
 const ChatMessage = ({ text, sender }) => {
   return (
-    <HoverCard>
-      <HoverCardTrigger
-        onClick={() =>
-          toast("Text Copied!", {
-            description: "not yet implemented :(",
-            action: {
-              label: "close",
-              onClick: () => console.log("Undo"),
-            },
-          })
-        }
-        className="cursor-pointer"
-      >
-        <div
-          className={`chat-message flex items-start gap-2 ${
-            sender === "user" ? "user" : "assistant"
-          }`}
+    <ContextMenu>
+      <ContextMenuTrigger>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger
+              asChild
+              onClick={() => {
+                navigator.clipboard.writeText(text);
+                toast("Text Copied!", {
+                  action: {
+                    label: "Close",
+                    onClick: () => "",
+                  },
+                });
+              }}
+              className="cursor-pointer"
+            >
+              <div
+                className={`chat-message flex items-center items-start gap-2 ${
+                  sender === "user" ? "user" : "assistant"
+                }`}
+              >
+                <Avatar>
+                  <AvatarImage
+                    src="https://github.com/shadcn.png"
+                    alt={sender}
+                  />
+                  <AvatarFallback>A</AvatarFallback>
+                </Avatar>
+                {/* <span className="text-gray-800 text-base leading-relaxed">{text}</span> */}
+                <ReactMarkdown className=" text-base leading-relaxed">
+                  {text}
+                </ReactMarkdown>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent>
+              <div>copy</div>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </ContextMenuTrigger>
+
+      <ContextMenuContent className="w-64">
+        <ContextMenuItem
+          onClick={() => {
+            navigator.clipboard.writeText(text);
+            toast("Text Copied!", {
+              action: {
+                label: "Close",
+                onClick: () => "",
+              },
+            });
+          }}
+          inset
         >
-          <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" alt={sender} />
-            <AvatarFallback>A</AvatarFallback>
-          </Avatar>
-          {/* <span className="text-gray-800 text-base leading-relaxed">{text}</span> */}
-          <ReactMarkdown className="text-gray-800 text-base leading-relaxed">
-            {text}
-          </ReactMarkdown>
-        </div>
-      </HoverCardTrigger>
-      <HoverCardContent className="w-auto">
-        <div className="flex justify-between space-x-4">
-          <div>copy</div>
-        </div>
-      </HoverCardContent>
-    </HoverCard>
+          Copy
+          <ContextMenuShortcut>⌘C</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem inset>
+          Back
+          <ContextMenuShortcut>⌘[</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem inset disabled>
+          Forward
+          <ContextMenuShortcut>⌘]</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem inset>
+          Reload
+          <ContextMenuShortcut>⌘R</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuSub>
+          <ContextMenuSubTrigger inset>More Tools</ContextMenuSubTrigger>
+          <ContextMenuSubContent className="w-48">
+            <ContextMenuItem>
+              Save Page As...
+              <ContextMenuShortcut>⇧⌘S</ContextMenuShortcut>
+            </ContextMenuItem>
+            <ContextMenuItem>Create Shortcut...</ContextMenuItem>
+            <ContextMenuItem>Name Window...</ContextMenuItem>
+            <ContextMenuSeparator />
+            <ContextMenuItem>Developer Tools</ContextMenuItem>
+          </ContextMenuSubContent>
+        </ContextMenuSub>
+      </ContextMenuContent>
+    </ContextMenu>
   );
 };
 
