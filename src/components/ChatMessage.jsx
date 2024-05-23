@@ -28,41 +28,40 @@ const ChatMessage = ({ text, sender }) => {
       <ContextMenuTrigger>
         <TooltipProvider>
           <Tooltip>
-            <TooltipTrigger
-              asChild
-              onClick={() => {
-                navigator.clipboard.writeText(text);
-                toast("Text Copied!", {
-                  action: {
-                    label: "Close",
-                    onClick: () => "",
-                  },
-                });
-              }}
-              className=" cursor-pointer"
-            >
-              <div
-                className={` grid grid-col-1 gap-2.5 [&_>_*]:min-w-0 chat-message flex items-center items-start gap-2 ${
-                  sender === "user" ? "user" : "assistant"
-                }`}
+            <div className="flex gap-2">
+              <Avatar>
+                <AvatarImage src="https://github.com/shadcn.png" alt={sender} />
+                <AvatarFallback>A</AvatarFallback>
+              </Avatar>
+              <TooltipTrigger
+                asChild
+                onClick={() => {
+                  navigator.clipboard.writeText(text);
+                  toast("Text Copied!", {
+                    action: {
+                      label: "Close",
+                      onClick: () => "",
+                    },
+                  });
+                }}
+                className=" cursor-pointer"
               >
-                <Avatar>
-                  <AvatarImage
-                    src="https://github.com/shadcn.png"
-                    alt={sender}
-                  />
-                  <AvatarFallback>A</AvatarFallback>
-                </Avatar>
-                {/* <span className="text-gray-800 text-base leading-relaxed">{text}</span> */}
+                <div
+                  className={` grid grid-col-1 gap-2.5 [&_>_*]:min-w-0 chat-message flex items-center items-start gap-2 ${
+                    sender === "user" ? "user" : "assistant"
+                  }`}
+                >
+                  {/* <span className="text-gray-800 text-base leading-relaxed">{text}</span> */}
 
-                <ReactMarkdown className="textmd text-base leading-relaxed">
-                  {text}
-                </ReactMarkdown>
-              </div>
-            </TooltipTrigger>
-            <TooltipContent>
-              <div>copy</div>
-            </TooltipContent>
+                  <ReactMarkdown className="textmd text-base leading-relaxed">
+                    {text}
+                  </ReactMarkdown>
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>
+                <div>copy</div>
+              </TooltipContent>
+            </div>
           </Tooltip>
         </TooltipProvider>
       </ContextMenuTrigger>
