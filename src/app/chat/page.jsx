@@ -1,19 +1,22 @@
-"use client";
-
 import { Resizable } from "@/components/Resizable";
-import useKeyboardShortcut from "@/hooks/useKeyboardShortcut";
 import React from "react";
 
-const Chat = () => {
-  useKeyboardShortcut(["Control", " "], () => {
-    const button = document.getElementById("micButton");
-    if (button) {
-      button.click();
-    }
-    // console.log("pressed");
+import { getTokens } from "next-firebase-auth-edge";
+import { cookies } from "next/headers";
+import { notFound } from "next/navigation";
+import { clientConfig, serverConfig } from "@/config";
+
+export default async function Chat() {
+  const tokens = await getTokens(cookies(), {
+    apiKey: clientConfig.apiKey,
+    cookieName: serverConfig.cookieName,
+    cookieSignatureKeys: serverConfig.cookieSignatureKeys,
+    serviceAccount: serverConfig.serviceAccount,
   });
 
-  return <Resizable />;
-};
+  if (!tokens) {
+    notFound();
+  }
 
-export default Chat;
+  return <Resizable />;
+}

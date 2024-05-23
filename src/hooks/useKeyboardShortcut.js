@@ -1,3 +1,4 @@
+"use client";
 // src/hooks/useKeyboardShortcut.js
 import { useEffect, useRef } from "react";
 

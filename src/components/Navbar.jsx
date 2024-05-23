@@ -5,8 +5,22 @@
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 import * as React from "react";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+
+import { useRouter } from "next/navigation";
+import { getAuth, signOut } from "firebase/auth";
+import { app } from "@/firebase";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 import {
   Menubar,
@@ -36,6 +50,18 @@ import {
 } from "@/components/ui/navigation-menu";
 
 export default function Navbar() {
+  const [open, setOpen] = React.useState(false);
+  const router = useRouter();
+
+  async function handleLogout() {
+    await signOut(getAuth(app));
+
+    await fetch("/api/logout");
+
+    router.push("/login");
+    router.refresh();
+    setOpen(false);
+  }
   return (
     <nav className="sticky inset-x-0 top-0 z-50 backdrop-blur-lg  shadow-sm ">
       <div className="w-full max-w-7xl mx-auto px-4">
@@ -71,13 +97,25 @@ export default function Navbar() {
             </Link>
           </nav> */}
           <NavigationMenuButton />
-          <div className="flex items-center gap-4">
-            <MenubarButton />
-            {/* <Button size="sm" variant="outline">
+          <Dialog open={open} onOpenChange={setOpen}>
+            <div className="flex items-center gap-4">
+              <MenubarButton />
+              {/* <Button size="sm" variant="outline">
               Sign in
-            </Button>
+              </Button>
             <Button size="sm">Sign up</Button> */}
-          </div>
+            </div>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Are you really wanto to Log Out?</DialogTitle>
+                <DialogDescription>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut,
+                  ea nesciunt doloribus tempore unde ullam!
+                </DialogDescription>
+              </DialogHeader>
+              <Button onClick={handleLogout}>Log Out</Button>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </nav>
@@ -190,6 +228,12 @@ function MenubarButton() {
           <MenubarItem inset>
             <Link href="/login">Add Profile...</Link>
           </MenubarItem>
+
+          <DialogTrigger asChild>
+            <MenubarItem className="cursor-pointer" inset>
+              Logout
+            </MenubarItem>
+          </DialogTrigger>
         </MenubarContent>
       </MenubarMenu>
     </Menubar>

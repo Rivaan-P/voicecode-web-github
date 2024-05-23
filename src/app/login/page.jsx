@@ -5,14 +5,19 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import Image from "next/image";
-import React from "react";
 
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { auth } from "@/app/firebase/config";
+import { FormEvent, useState } from "react";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { app } from "@/firebase";
+import { useRouter } from "next/navigation";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-function Login() {
+export default function Login() {
   return (
     <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
       <div className="flex items-center justify-center py-12">
@@ -26,114 +31,10 @@ function Login() {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="loginPage">
-            <div className="mx-auto grid w-[350px] gap-6">
-              <div className="grid gap-2 text-center">
-                <h1 className="text-3xl font-bold">Login</h1>
-                <p className="text-balance text-muted-foreground">
-                  Enter your email below to login to your account
-                </p>
-              </div>
-              <div className="grid gap-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="m@example.com"
-                    required
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <div className="flex items-center">
-                    <Label htmlFor="password">Password</Label>
-                    <Link
-                      href="#"
-                      className="ml-auto inline-block text-sm underline"
-                    >
-                      Forgot your password?
-                    </Link>
-                  </div>
-                  <Input id="password" type="password" required />
-                </div>
-                <Button type="submit" className="w-full">
-                  Login
-                </Button>
-                <Button variant="outline" className="w-full">
-                  Login with Google
-                </Button>
-              </div>
-              <div className="mt-4 text-center text-sm">
-                Don&apos;t have an account?{" "}
-                <span
-                  onClick={() => {
-                    const button = document.getElementById("signuppage");
-
-                    if (button) {
-                      button.focus();
-                    }
-                  }}
-                  className="cursor-pointer underline"
-                >
-                  Sign Up
-                </span>
-              </div>
-            </div>
+            <LoginPage />
           </TabsContent>
           <TabsContent value="SignUpPage">
-            <div className="mx-auto grid w-[350px] gap-6">
-              <div className="grid gap-2 text-center">
-                <h1 className="text-3xl font-bold">Sign Up</h1>
-                <p className="text-balance text-muted-foreground">
-                  Enter your email below to sign up your account
-                </p>
-              </div>
-              <div className="grid gap-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="m@example.com"
-                    required
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <div className="flex items-center">
-                    <Label htmlFor="password">Password</Label>
-                    <Link
-                      href="#"
-                      className="ml-auto inline-block text-sm underline"
-                    >
-                      Forgot your password?
-                    </Link>
-                  </div>
-                  <Input id="password" type="password" required />
-                </div>
-                <Button type="submit" className="w-full">
-                  Sign Up
-                </Button>
-                <Button variant="outline" className="w-full">
-                  Sign Up with Google
-                </Button>
-              </div>
-              <div className="mt-4 text-center text-sm">
-                Already have an account?{" "}
-                {/* Don&apos;t have an account?{" "} */}
-                <span
-                  onClick={() => {
-                    console.log("clicked");
-                    const button = document.getElementById("loginpage");
-
-                    if (button) {
-                      button.focus();
-                    }
-                  }}
-                  className="cursor-pointer underline"
-                >
-                  Login
-                </span>
-              </div>
-            </div>
+            <SignUpPage />
           </TabsContent>
         </Tabs>
       </div>
@@ -153,4 +54,186 @@ function Login() {
 // Will be used to hide the navbar in the login page
 Login.noNavbar = true;
 
-export default Login;
+function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
+
+  async function handleSubmitLogin(event) {
+    event.preventDefault();
+    setError("");
+
+    try {
+      const credential = await signInWithEmailAndPassword(
+        getAuth(app),
+        email,
+        password
+      );
+
+      const idToken = await credential.user.getIdToken();
+
+      await fetch("/api/login", {
+        headers: {
+          Authorization: `Bearer ${idToken}`,
+        },
+      });
+      console.log("loging in");
+      router.push("/chat");
+      router.refresh();
+    } catch (e) {
+      setError(e.message);
+    }
+  }
+
+  return (
+    <div className="mx-auto grid w-[350px] gap-6">
+      <div className="grid gap-2 text-center">
+        <h1 className="text-3xl font-bold">Login</h1>
+        <p className="text-balance text-muted-foreground">
+          Enter your email below to login to your account
+        </p>
+      </div>
+      <form onSubmit={handleSubmitLogin} action="#">
+        <div className="grid gap-4">
+          <div className="grid gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              id="email"
+              type="email"
+              placeholder="m@example.com"
+              required
+            />
+          </div>
+          <div className="grid gap-2">
+            <div className="flex items-center">
+              <Label htmlFor="password">Password</Label>
+              <Link href="#" className="ml-auto inline-block text-sm underline">
+                Forgot your password?
+              </Link>
+            </div>
+            <Input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              id="password"
+              type="password"
+              required
+            />
+          </div>
+          <Button type="submit" className="w-full">
+            Login
+          </Button>
+          <Button variant="outline" className="w-full">
+            Login with Google
+          </Button>
+        </div>
+      </form>
+      <div className="mt-4 text-center text-sm">
+        Don&apos;t have an account?{" "}
+        <span
+          onClick={() => {
+            const button = document.getElementById("signuppage");
+
+            if (button) {
+              button.focus();
+            }
+          }}
+          className="cursor-pointer underline"
+        >
+          Sign Up
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function SignUpPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmation, setConfirmation] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
+
+  async function handleSubmitSignUp(event) {
+    event.preventDefault();
+
+    setError("");
+
+    // if (password !== confirmation) {
+    //   setError("Passwords don't match");
+    //   return;
+    // }
+
+    try {
+      await createUserWithEmailAndPassword(getAuth(app), email, password);
+      router.push("/");
+    } catch (e) {
+      setError(e.message);
+    }
+  }
+
+  return (
+    <div className="mx-auto grid w-[350px] gap-6">
+      <div className="grid gap-2 text-center">
+        <h1 className="text-3xl font-bold">Sign Up</h1>
+        <p className="text-balance text-muted-foreground">
+          Enter your email below to sign up your account
+        </p>
+      </div>
+      <form onSubmit={handleSubmitSignUp} action="#">
+        <div className="grid gap-4">
+          <div className="grid gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              id="email"
+              type="email"
+              placeholder="m@example.com"
+              required
+            />
+          </div>
+          <div className="grid gap-2">
+            <div className="flex items-center">
+              <Label htmlFor="password">Password</Label>
+              <Link href="#" className="ml-auto inline-block text-sm underline">
+                Forgot your password?
+              </Link>
+            </div>
+            <Input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              id="password"
+              type="password"
+              required
+            />
+          </div>
+          <Button type="submit" className="w-full">
+            Sign Up
+          </Button>
+          <Button variant="outline" className="w-full">
+            Sign Up with Google
+          </Button>
+        </div>
+      </form>
+      <div className="mt-4 text-center text-sm">
+        Already have an account? {/* Don&apos;t have an account?{" "} */}
+        <span
+          onClick={() => {
+            console.log("clicked");
+            const button = document.getElementById("loginpage");
+
+            if (button) {
+              button.focus();
+            }
+          }}
+          className="cursor-pointer underline"
+        >
+          Login
+        </span>
+      </div>
+    </div>
+  );
+}

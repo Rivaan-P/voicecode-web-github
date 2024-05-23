@@ -1,3 +1,4 @@
+"use client";
 import {
   ResizableHandle,
   ResizablePanel,
@@ -5,8 +6,16 @@ import {
 } from "@/components/ui/resizable";
 
 import ChatDialog from "./DialogChat";
+import useKeyboardShortcut from "@/hooks/useKeyboardShortcut";
 
 export function Resizable() {
+  useKeyboardShortcut(["Control", " "], () => {
+    const button = document.getElementById("micButton");
+    if (button) {
+      button.click();
+    }
+    // console.log("pressed");
+  });
   return (
     <ResizablePanelGroup
       direction="horizontal"
