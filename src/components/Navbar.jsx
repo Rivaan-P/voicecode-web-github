@@ -187,7 +187,9 @@ function MenubarButton() {
           <MenubarSeparator />
           <MenubarItem inset>Settings</MenubarItem>
           <MenubarSeparator />
-          <MenubarItem inset>Add Profile...</MenubarItem>
+          <MenubarItem inset>
+            <Link href="/login">Add Profile...</Link>
+          </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
     </Menubar>
