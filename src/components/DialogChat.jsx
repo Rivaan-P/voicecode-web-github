@@ -5,11 +5,12 @@ import { Separator } from "./ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { Toggle } from "@/components/ui/toggle";
+import { Button } from "@/components/ui/button";
 
 import { AutosizeTextarea } from "@/components/ui/autosize-textarea";
 
 import ChatMessage from "./ChatMessage";
-import { Mic } from "lucide-react";
+import { Mic, Send } from "lucide-react";
 
 const ChatDialog = () => {
   const [messages, setMessages] = useState([]);
@@ -60,9 +61,14 @@ const ChatDialog = () => {
           onKeyDown={handleKeyDown}
           placeholder="Reply to VoiceCode..."
         />
-        <Toggle id="micButton" aria-label="Toggle bold">
-          <Mic />
-        </Toggle>
+        <div className="flex flex-col items-center gap-2">
+          <Button type="submit" variant="outline">
+            <Send />
+          </Button>
+          <Toggle id="micButton" aria-label="Toggle bold">
+            <Mic />
+          </Toggle>
+        </div>
       </form>
     </div>
   );
