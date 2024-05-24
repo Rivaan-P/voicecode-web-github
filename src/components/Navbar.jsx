@@ -4,6 +4,7 @@
  * @see https://v0.dev/t/xYHqD5MkVkT
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
+
 import * as React from "react";
 
 import Link from "next/link";
@@ -225,9 +226,11 @@ function MenubarButton() {
           <MenubarSeparator />
           <MenubarItem inset>Settings</MenubarItem>
           <MenubarSeparator />
-          <MenubarItem inset>
-            <Link href="/login">Add Profile...</Link>
-          </MenubarItem>
+          <Link href="/login">
+            <MenubarItem className="cursor-pointer" inset>
+              Add Profile...
+            </MenubarItem>
+          </Link>
 
           <DialogTrigger asChild>
             <MenubarItem className="cursor-pointer" inset>

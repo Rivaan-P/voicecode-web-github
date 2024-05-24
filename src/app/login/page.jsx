@@ -6,6 +6,8 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import Image from "next/image";
 
+import { toast } from "sonner";
+
 import { FormEvent, useState } from "react";
 import {
   getAuth,
@@ -78,7 +80,12 @@ function LoginPage() {
           Authorization: `Bearer ${idToken}`,
         },
       });
-      console.log("loging in");
+      toast("Login Succesful", {
+        action: {
+          label: "Close",
+          onClick: () => "",
+        },
+      });
       router.push("/chat");
       router.refresh();
     } catch (e) {
@@ -169,6 +176,12 @@ function SignUpPage() {
     try {
       await createUserWithEmailAndPassword(getAuth(app), email, password);
       router.push("/");
+      toast("Register Succesful", {
+        action: {
+          label: "Login",
+          onClick: () => router.push("/login"),
+        },
+      });
     } catch (e) {
       setError(e.message);
     }
@@ -222,7 +235,6 @@ function SignUpPage() {
         Already have an account? {/* Don&apos;t have an account?{" "} */}
         <span
           onClick={() => {
-            console.log("clicked");
             const button = document.getElementById("loginpage");
 
             if (button) {

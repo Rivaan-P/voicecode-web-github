@@ -59,15 +59,15 @@ const ChatDialog = () => {
           value={inputValue}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          placeholder="Reply to VoiceCode..."
+          placeholder="Tip: Use Ctrl + Space as a voice shortcut."
         />
-        <div className="flex flex-col items-center gap-2">
-          <Button type="submit" variant="outline">
-            <Send />
-          </Button>
+        <div className="flex  items-center gap-2">
           <Toggle id="micButton" aria-label="Toggle bold">
             <Mic />
           </Toggle>
+          <Button type="submit" variant="outline">
+            <Send />
+          </Button>
         </div>
       </form>
     </div>
