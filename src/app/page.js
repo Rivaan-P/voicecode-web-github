@@ -1,5 +1,5 @@
 import ChatDialog from "@/components/DialogChat";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/navbar/Navbar";
 import { Resizable } from "@/components/Resizable";
 
 export default function Home() {
