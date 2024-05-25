@@ -30,7 +30,7 @@ export function Resizable() {
               <span className="font-semibold">File Directory UI</span>
             </div> */}
           </ResizablePanel>
-          <ResizableHandle />
+          <ResizableHandle withHandle />
           <ResizablePanel defaultSize={75}>
             <div className="flex h-full items-center justify-center p-6">
               <span className="font-semibold">Prompt Branching UI</span>

@@ -3,7 +3,7 @@
 import { Input } from "@/components/ui/input";
 import { Separator } from "./ui/separator";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Toggle } from "@/components/ui/toggle";
 import { Button } from "@/components/ui/button";
 
@@ -18,6 +18,7 @@ const ChatDialog = () => {
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
+    console.log("berubah");
   };
 
   const handleKeyDown = (e) => {
@@ -35,8 +36,17 @@ const ChatDialog = () => {
     if (inputValue.trim()) {
       setMessages([...messages, { text: inputValue, sender: "user" }]);
       // Call your API or handle the user's input here
+
       setInputValue("");
     }
+    const inputcet = document.getElementById("inputchet");
+    const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+      window.HTMLTextAreaElement.prototype,
+      "value"
+    ).set;
+    nativeInputValueSetter.call(inputcet, "");
+    const event = new Event("input", { bubbles: true });
+    inputcet.dispatchEvent(event);
   };
 
   return (
@@ -53,6 +63,7 @@ const ChatDialog = () => {
       <Separator className="my-4" />
       <form className="flex gap-4 items-center" onSubmit={handleSubmit}>
         <AutosizeTextarea
+          id="inputchet"
           className="min-h-[60px] w-full bg-transparent  resize-none px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
           rows={1}
           name="message"
@@ -66,7 +77,7 @@ const ChatDialog = () => {
           <Toggle id="micButton" aria-label="Toggle bold">
             <Mic />
           </Toggle>
-          <Button type="submit" variant="outline">
+          <Button onClick={() => {}} type="submit" variant="outline">
             <Send />
           </Button>
         </div>
