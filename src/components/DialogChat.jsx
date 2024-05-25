@@ -53,7 +53,8 @@ const ChatDialog = () => {
       <Separator className="my-4" />
       <form className="flex gap-4 items-center" onSubmit={handleSubmit}>
         <AutosizeTextarea
-          maxHeight={200}
+          className="min-h-[60px] w-full bg-transparent  resize-none px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
+          rows={1}
           name="message"
           autoComplete="off"
           value={inputValue}

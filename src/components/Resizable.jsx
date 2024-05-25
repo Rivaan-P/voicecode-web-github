@@ -7,6 +7,7 @@ import {
 
 import ChatDialog from "./DialogChat";
 import useKeyboardShortcut from "@/hooks/useKeyboardShortcut";
+import FileDirectoryPage from "./filedirectory/FileDirectoryPage";
 
 export function Resizable() {
   useKeyboardShortcut(["Control", " "], () => {
@@ -21,12 +22,13 @@ export function Resizable() {
       direction="horizontal"
       className="resize-chat rounded-lg border"
     >
-      <ResizablePanel defaultSize={50}>
+      <ResizablePanel id="kiri" defaultSize={50}>
         <ResizablePanelGroup direction="vertical">
           <ResizablePanel defaultSize={25}>
-            <div className="flex h-full items-center justify-center p-6">
+            <FileDirectoryPage />
+            {/* <div className="flex h-full items-center justify-center p-6">
               <span className="font-semibold">File Directory UI</span>
-            </div>
+            </div> */}
           </ResizablePanel>
           <ResizableHandle />
           <ResizablePanel defaultSize={75}>

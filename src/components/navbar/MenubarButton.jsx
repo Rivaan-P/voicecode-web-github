@@ -89,7 +89,21 @@ export function MenubarButton() {
           <MenubarSeparator />
           <MenubarItem inset>Toggle Fullscreen</MenubarItem>
           <MenubarSeparator />
-          <MenubarItem inset>Hide Sidebar</MenubarItem>
+          <MenubarItem
+            className="cursor-pointer"
+            onClick={() => {
+              console.log("cliked");
+              const divElement = document.getElementById("kiri");
+              if (divElement) {
+                divElement.setAttribute("data-panel-size", "0");
+                divElement.style.flex = "0 1 0px";
+                divElement.style.overflow = "hidden";
+              }
+            }}
+            inset
+          >
+            <div>Hide Sidebar</div>
+          </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>
