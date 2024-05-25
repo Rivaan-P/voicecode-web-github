@@ -12,8 +12,7 @@ Voice-Activated Code Generation, Debugging, and Visualization for Seamless Progr
   <a href="#"><img alt="PRs" src="https://img.shields.io/badge/PRs-Welcome-3DDC84?style=flat-square"></a>
 </p>
 <p align="center">
-  <a href="https://github.com/myudak"><img alt="Github - myudak" src="https://img.shields.io/badge/GitHub-myudak-181717?style=flat-square&logo=github"></a>
-  <a href="https://linkedin.com/myudak"><img alt="Linkedin - myudak" src="https://img.shields.io/badge/Linkedin-myudak-1DA1F2?style=flat-square&logo=linkedin"></a>
+  <a href="https://github.com/Rivaan-P/Voicecode-web"><img alt="Github - myudak" src="https://img.shields.io/badge/GitHub-Voicecode-181717?style=flat-square&logo=github"></a>
 </p>
 
 <br>
