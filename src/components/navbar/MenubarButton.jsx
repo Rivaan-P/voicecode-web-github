@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/menubar";
 
 export function MenubarButton() {
+  const [isFullscreen, setisFullscreen] = React.useState(false);
   return (
     <Menubar>
       <MenubarMenu>
@@ -87,7 +88,41 @@ export function MenubarButton() {
             Force Reload <MenubarShortcut>⇧⌘R</MenubarShortcut>
           </MenubarItem>
           <MenubarSeparator />
-          <MenubarItem inset>Toggle Fullscreen</MenubarItem>
+          <MenubarItem
+            onClick={() => {
+              console.log(!isFullscreen);
+              if (!isFullscreen) {
+                // Enter fullscreen mode
+                if (document.documentElement.requestFullscreen) {
+                  document.documentElement.requestFullscreen();
+                } else if (document.documentElement.webkitRequestFullscreen) {
+                  document.documentElement.webkitRequestFullscreen();
+                } else if (document.documentElement.msRequestFullscreen) {
+                  document.documentElement.msRequestFullscreen();
+                }
+                setisFullscreen(true);
+              } else {
+                try {
+                  document.exitFullscreen;
+                  if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                  } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                  } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                  }
+                } catch (e) {
+                  console.log("ye");
+                } finally {
+                  setisFullscreen(false);
+                  // Exit fullscreen mode
+                }
+              }
+            }}
+            inset
+          >
+            Toggle Fullscreen
+          </MenubarItem>
           <MenubarSeparator />
           <MenubarItem
             className="cursor-pointer"
@@ -96,13 +131,14 @@ export function MenubarButton() {
               const divElement = document.getElementById("kiri");
               if (divElement) {
                 divElement.setAttribute("data-panel-size", "0");
+                divElement.setAttribute("size", "0");
                 divElement.style.flex = "0 1 0px";
                 divElement.style.overflow = "hidden";
               }
             }}
             inset
           >
-            <div>Hide Sidebar</div>
+            Hide Sidebar
           </MenubarItem>
         </MenubarContent>
       </MenubarMenu>

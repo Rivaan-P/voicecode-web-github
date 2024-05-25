@@ -24,6 +24,7 @@ import {
 
 import { NavigationMenuButton } from "./NavigationMenuButton";
 import { MenubarButton } from "./MenubarButton";
+import { toast } from "sonner";
 
 export default function Navbar() {
   const [open, setOpen] = React.useState(false);
@@ -64,7 +65,29 @@ export default function Navbar() {
                   ea nesciunt doloribus tempore unde ullam!
                 </DialogDescription>
               </DialogHeader>
-              <Button onClick={handleLogout}>Log Out</Button>
+              <Button
+                onClick={() => {
+                  const auth = getAuth();
+                  const user = auth.currentUser;
+                  console.log(user);
+
+                  if (user) {
+                    // User is signed in.
+                    handleLogout();
+                  } else {
+                    toast("You dont have an account!", {
+                      action: {
+                        label: "Close",
+                        onClick: () => "",
+                      },
+                    });
+
+                    // No user is signed in.
+                  }
+                }}
+              >
+                Log Out
+              </Button>
             </DialogContent>
           </Dialog>
         </div>

@@ -13,6 +13,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { app } from "@/firebase";
 import { useRouter } from "next/navigation";
@@ -158,6 +159,7 @@ function LoginPage() {
 
 function SignUpPage() {
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmation, setConfirmation] = useState("");
   const [error, setError] = useState("");
@@ -172,9 +174,24 @@ function SignUpPage() {
     //   setError("Passwords don't match");
     //   return;
     // }
-
+    console.log(username);
     try {
-      await createUserWithEmailAndPassword(getAuth(app), email, password);
+      await createUserWithEmailAndPassword(getAuth(app), email, password)
+        .then((res) => {
+          updateProfile(getAuth(app).currentUser, {
+            displayName: username,
+          });
+          // const user = firebase.auth().currentUser;
+          // user.updateProfile({
+          //   displayName: username,
+          // });
+        })
+        .catch((error) => {
+          console.error(error);
+          // An error occurred
+          // ...
+        });
+
       router.push("/");
       toast("Register Succesful", {
         action: {
@@ -198,6 +215,16 @@ function SignUpPage() {
       <form onSubmit={handleSubmitSignUp} action="#">
         <div className="grid gap-4">
           <div className="grid gap-2">
+            <Label htmlFor="username">Username</Label>
+            <Input
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              id="username"
+              placeholder="m"
+              required
+            />
+          </div>
+          <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input
               value={email}
@@ -219,6 +246,7 @@ function SignUpPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               id="password"
+              placeholder="********"
               type="password"
               required
             />
