@@ -7,12 +7,20 @@ import { useRef, useState } from "react";
 import { Toggle } from "@/components/ui/toggle";
 import { Button } from "@/components/ui/button";
 
+import { useChat } from "ai/react";
+
 import { AutosizeTextarea } from "@/components/ui/autosize-textarea";
 
 import ChatMessage from "./ChatMessage";
 import { Mic, Send } from "lucide-react";
 
 const ChatDialog = () => {
+  const {
+    messages: messagesAI,
+    input,
+    handleInputChange: handleInputChangeAI,
+    handleSubmit: handleSubmitAI,
+  } = useChat();
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
 
@@ -32,13 +40,14 @@ const ChatDialog = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    if (inputValue.trim()) {
-      setMessages([...messages, { text: inputValue, sender: "user" }]);
-      // Call your API or handle the user's input here
+    // e.preventDefault();
+    // if (inputValue.trim()) {
+    //   setMessages([...messages, { text: inputValue, sender: "user" }]);
+    //   // Call your API or handle the user's input here
 
-      setInputValue("");
-    }
+    //   setInputValue("");
+    // }
+    handleSubmitAI(e);
     const inputcet = document.getElementById("inputchet");
     const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
       window.HTMLTextAreaElement.prototype,
@@ -52,12 +61,8 @@ const ChatDialog = () => {
   return (
     <div className="chat-window">
       <div className="chat-messages">
-        {messages.map((message, index) => (
-          <ChatMessage
-            key={index}
-            text={message.text}
-            sender={message.sender}
-          />
+        {messagesAI.map((m) => (
+          <ChatMessage key={m.id} text={m.content} sender={m.role} />
         ))}
       </div>
       <Separator className="my-4" />
@@ -68,8 +73,8 @@ const ChatDialog = () => {
           rows={1}
           name="message"
           autoComplete="off"
-          value={inputValue}
-          onChange={handleInputChange}
+          value={input}
+          onChange={handleInputChangeAI}
           onKeyDown={handleKeyDown}
           placeholder="Tip: Use Ctrl + Space as a voice shortcut."
         />

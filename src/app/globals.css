@@ -105,7 +105,6 @@ body {
 }
 
 .chat-message.assistant {
-  background-color: #f0f0f0;
   align-self: flex-start;
 }
 

@@ -28,11 +28,30 @@ const ChatMessage = ({ text, sender }) => {
       <ContextMenuTrigger>
         <TooltipProvider>
           <Tooltip>
-            <div className="flex gap-2">
-              <Avatar>
-                <AvatarImage src="https://github.com/shadcn.png" alt={sender} />
-                <AvatarFallback>A</AvatarFallback>
-              </Avatar>
+            <div
+              className={`flex  gap-2 ${
+                sender === "user" ? "flex-row-reverse" : ""
+              }`}
+            >
+              {sender === "user" ? (
+                <Avatar>
+                  <AvatarImage
+                    src="https://github.com/shadcn.png"
+                    alt={sender}
+                  />
+                  <AvatarFallback>A</AvatarFallback>
+                </Avatar>
+              ) : (
+                <Avatar>
+                  <AvatarImage
+                    src="
+              https://avatars.githubusercontent.com/u/69108782?v=4"
+                    alt={sender}
+                  />
+                  <AvatarFallback>A</AvatarFallback>
+                </Avatar>
+              )}
+
               <TooltipTrigger
                 asChild
                 onClick={() => {
@@ -48,7 +67,7 @@ const ChatMessage = ({ text, sender }) => {
               >
                 <div
                   className={` grid grid-col-1 gap-2.5 [&_>_*]:min-w-0 chat-message flex items-center items-start gap-2 ${
-                    sender === "user" ? "user" : "assistant"
+                    sender === "user" ? "user text-right" : "assistant "
                   }`}
                 >
                   {/* <span className="text-gray-800 text-base leading-relaxed">{text}</span> */}

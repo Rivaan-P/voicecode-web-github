@@ -81,12 +81,14 @@ function LoginPage() {
           Authorization: `Bearer ${idToken}`,
         },
       });
+
       toast("Login Succesful", {
         action: {
           label: "Close",
           onClick: () => "",
         },
       });
+
       router.push("/chat");
       router.refresh();
     } catch (e) {
@@ -188,15 +190,27 @@ function SignUpPage() {
         })
         .catch((error) => {
           console.error(error);
-          // An error occurred
-          // ...
         });
 
-      router.push("/");
+      const credential = await signInWithEmailAndPassword(
+        getAuth(app),
+        email,
+        password
+      );
+
+      const idToken = await credential.user.getIdToken();
+
+      await fetch("/api/login", {
+        headers: {
+          Authorization: `Bearer ${idToken}`,
+        },
+      });
+
+      router.push("/chat");
       toast("Register Succesful", {
         action: {
-          label: "Login",
-          onClick: () => router.push("/login"),
+          label: "Close",
+          onClick: () => "",
         },
       });
     } catch (e) {
@@ -219,7 +233,7 @@ function SignUpPage() {
             <Input
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              type="text"
+              type="name"
               id="username"
               placeholder="m"
               required

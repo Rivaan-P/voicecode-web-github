@@ -194,7 +194,16 @@ export function MenubarButton() {
             )}
           </MenubarRadioGroup>
           <MenubarSeparator />
-          {!isUser ? "" : <MenubarItem inset>Settings</MenubarItem>}
+          {!isUser ? (
+            ""
+          ) : (
+            <Link href="/chat/settings">
+              {" "}
+              <MenubarItem className="cursor-pointer" inset>
+                Settings
+              </MenubarItem>{" "}
+            </Link>
+          )}
           <MenubarSeparator />
           {isUser ? (
             <MenubarItem
