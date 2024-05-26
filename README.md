@@ -22,9 +22,8 @@ Voice-Activated Code Generation, Debugging, and Visualization for Seamless Progr
 
 ### TEAM
 
-- MUCHAMAD YUDA TRI ANANDA
+- myudak
 - anonis
-- x
 - notcoose
 
 </p><br>
