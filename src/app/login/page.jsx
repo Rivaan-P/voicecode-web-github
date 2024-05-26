@@ -219,6 +219,7 @@ function SignUpPage() {
             <Input
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              type="text"
               id="username"
               placeholder="m"
               required

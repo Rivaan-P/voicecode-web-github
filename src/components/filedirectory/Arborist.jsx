@@ -10,6 +10,7 @@ import { TbFolderPlus } from "react-icons/tb";
 import { AiOutlineFileAdd } from "react-icons/ai";
 
 import { SiHtml5, SiJavascript, SiCss3, SiMarkdown } from "react-icons/si";
+import useResizeObserver from "use-resize-observer";
 
 const Arborist = () => {
   const [term, setTerm] = useState("");
@@ -41,8 +42,10 @@ const Arborist = () => {
     </>
   );
 
+  const { ref, width, height } = useResizeObserver();
+
   return (
-    <div>
+    <div ref={ref}>
       <div className="folderFileActions">{createFileFolder}</div>
       <input
         type="text"
@@ -56,6 +59,7 @@ const Arborist = () => {
         initialData={data}
         indent={24}
         rowHeight={32}
+        width={width}
         // openByDefault={false}
         searchTerm={term}
         searchMatch={(node, term) =>

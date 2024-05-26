@@ -84,11 +84,16 @@ const Node = ({ node, style, dragHandle, tree }) => {
 export default Node;
 
 function filterExtension(node, e) {
-  if (e.currentTarget.value.includes("html")) {
-    node.data.icon = SiHtml5;
-  }
-  if (e.currentTarget.value.includes("json")) {
-    node.data.icon = SiJavascript;
-    node.data.iconColor = "#efd81e";
+  console.log(node.isLeaf);
+
+  if (node.isLeaf) {
+    if (e.currentTarget.value.includes("html")) {
+      node.data.icon = SiHtml5;
+      node.data.iconColor = "#dc4a25";
+    }
+    if (e.currentTarget.value.includes("js")) {
+      node.data.icon = SiJavascript;
+      node.data.iconColor = "#efd81e";
+    }
   }
 }

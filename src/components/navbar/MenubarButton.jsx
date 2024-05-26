@@ -17,11 +17,29 @@ import {
   MenubarSubTrigger,
   MenubarTrigger,
 } from "@/components/ui/menubar";
+import { getAuth } from "firebase/auth";
+import { toast } from "sonner";
 
 export function MenubarButton() {
   const [isFullscreen, setisFullscreen] = React.useState(false);
+  const [isUser, setIsUser] = React.useState("");
+
+  const auth = getAuth();
+  const user = auth.currentUser;
   return (
-    <Menubar>
+    <Menubar
+      onClick={() => {
+        const auth = getAuth();
+        const user = auth.currentUser;
+        if (user) {
+          // User is signed in.
+          // console.log(user);
+          setIsUser(user.displayName);
+        } else {
+          setIsUser("");
+        }
+      }}
+    >
       <MenubarMenu>
         <MenubarTrigger>File</MenubarTrigger>
         <MenubarContent>
@@ -103,7 +121,6 @@ export function MenubarButton() {
                 setisFullscreen(true);
               } else {
                 try {
-                  document.exitFullscreen;
                   if (document.exitFullscreen) {
                     document.exitFullscreen();
                   } else if (document.webkitExitFullscreen) {
@@ -134,6 +151,13 @@ export function MenubarButton() {
                 divElement.setAttribute("size", "0");
                 divElement.style.flex = "0 1 0px";
                 divElement.style.overflow = "hidden";
+              } else {
+                toast("You are not in chat page!", {
+                  action: {
+                    label: "Close",
+                    onClick: () => "",
+                  },
+                });
               }
             }}
             inset
@@ -143,20 +167,57 @@ export function MenubarButton() {
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>
-        <MenubarTrigger>Profiles</MenubarTrigger>
+        <MenubarTrigger
+          onClick={() => {
+            const auth = getAuth();
+            const user = auth.currentUser;
+
+            if (user) {
+              // User is signed in.
+              // console.log(user);
+              setIsUser(user.displayName);
+            } else {
+              setIsUser("");
+            }
+          }}
+        >
+          Profiles
+        </MenubarTrigger>
         <MenubarContent>
-          <MenubarRadioGroup value="myudak">
-            <MenubarRadioItem value="myudak">myudak</MenubarRadioItem>
-            <MenubarRadioItem value="anonis">anonis</MenubarRadioItem>
+          <MenubarRadioGroup value={isUser}>
+            {/* <MenubarRadioItem value="myudak">myudak</MenubarRadioItem>
+            <MenubarRadioItem value="anonis">anonis</MenubarRadioItem> */}
+            {!isUser ? (
+              ""
+            ) : (
+              <MenubarRadioItem value={isUser}>{isUser}</MenubarRadioItem>
+            )}
           </MenubarRadioGroup>
           <MenubarSeparator />
-          <MenubarItem inset>Settings</MenubarItem>
+          {!isUser ? "" : <MenubarItem inset>Settings</MenubarItem>}
           <MenubarSeparator />
-          <Link href="/login">
-            <MenubarItem className="cursor-pointer" inset>
+          {isUser ? (
+            <MenubarItem
+              onClick={() => {
+                toast("Already Logged in!", {
+                  action: {
+                    label: "Close",
+                    onClick: () => "",
+                  },
+                });
+              }}
+              className="cursor-pointer"
+              inset
+            >
               Add Profile...
             </MenubarItem>
-          </Link>
+          ) : (
+            <Link href="/login">
+              <MenubarItem className="cursor-pointer" inset>
+                Add Profile...
+              </MenubarItem>
+            </Link>
+          )}
 
           <DialogTrigger asChild>
             <MenubarItem className="cursor-pointer" inset>
