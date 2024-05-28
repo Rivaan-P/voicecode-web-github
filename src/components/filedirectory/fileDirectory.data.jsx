@@ -1,6 +1,8 @@
 import { SiHtml5, SiJavascript, SiCss3, SiMarkdown } from "react-icons/si";
 import { FaNpm } from "react-icons/fa";
 
+import { IoLogoJavascript } from "react-icons/io";
+
 export const data = [
   {
     id: "1",
@@ -10,7 +12,7 @@ export const data = [
         id: "c1-1",
         name: "index.html",
         icon: SiHtml5,
-        iconColor: "#dc4a25",
+        iconColor: "#42a5f5",
       },
     ],
   },
@@ -21,18 +23,18 @@ export const data = [
       {
         id: "c2-1",
         name: "App.js",
-        icon: SiJavascript,
-        iconColor: "#efd81e",
+        icon: IoLogoJavascript,
+        iconColor: "#42a5f5",
       },
       {
         id: "c2-2",
         name: "index.js",
-        icon: SiJavascript,
-        iconColor: "#efd81e",
+        icon: IoLogoJavascript,
+        iconColor: "#42a5f5",
       },
       { id: "c2-3", name: "styles.css", icon: SiCss3, iconColor: "#42a5f5" },
     ],
   },
-  { id: "3", name: "package.json", icon: FaNpm, iconColor: "#c43636" },
-  { id: "4", name: "README.md", icon: SiMarkdown, iconColor: "#715537" },
+  { id: "3", name: "package.json", icon: FaNpm, iconColor: "#42a5f5" },
+  { id: "4", name: "README.md", icon: SiMarkdown, iconColor: "#42a5f5" },
 ];

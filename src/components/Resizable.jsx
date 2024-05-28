@@ -8,6 +8,7 @@ import {
 import ChatDialog from "./DialogChat";
 import useKeyboardShortcut from "@/hooks/useKeyboardShortcut";
 import FileDirectoryPage from "./filedirectory/FileDirectoryPage";
+import BranchingTree from "./branchingtree/BranchingTree";
 
 export function Resizable() {
   useKeyboardShortcut(["Control", " "], () => {
@@ -32,9 +33,10 @@ export function Resizable() {
           </ResizablePanel>
           <ResizableHandle withHandle />
           <ResizablePanel defaultSize={75}>
-            <div className="flex h-full items-center justify-center p-6">
+            <BranchingTree />
+            {/* <div className="flex h-full items-center justify-center p-6">
               <span className="font-semibold">Prompt Branching UI</span>
-            </div>
+            </div> */}
           </ResizablePanel>
         </ResizablePanelGroup>
       </ResizablePanel>

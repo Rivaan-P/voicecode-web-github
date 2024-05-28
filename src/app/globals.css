@@ -177,6 +177,13 @@ body {
   width: auto;
 }
 
+.mapFrame {
+  padding: 20px;
+  overflow: scroll;
+  height: 100%;
+  width: auto;
+}
+
 .node-container,
 .node-content {
   display: flex;

@@ -15,7 +15,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html class="dark" lang="en">
+    <html className="dark" lang="en">
       <Script src="/register-sw.js" />
       <body class="h-screen" className={inter.className}>
         <Navbar />

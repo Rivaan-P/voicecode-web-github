@@ -21,7 +21,6 @@ import { getAuth } from "firebase/auth";
 import { toast } from "sonner";
 
 export function MenubarButton() {
-  const [isFullscreen, setisFullscreen] = React.useState(false);
   const [isUser, setIsUser] = React.useState("");
 
   const auth = getAuth();
@@ -107,10 +106,9 @@ export function MenubarButton() {
           </MenubarItem>
           <MenubarSeparator />
           <MenubarItem
+            className="cursor-pointer"
             onClick={() => {
-              console.log(!isFullscreen);
-              if (!isFullscreen) {
-                // Enter fullscreen mode
+              if (!document.fullscreenElement) {
                 if (document.documentElement.requestFullscreen) {
                   document.documentElement.requestFullscreen();
                 } else if (document.documentElement.webkitRequestFullscreen) {
@@ -118,39 +116,32 @@ export function MenubarButton() {
                 } else if (document.documentElement.msRequestFullscreen) {
                   document.documentElement.msRequestFullscreen();
                 }
-                setisFullscreen(true);
-              } else {
-                try {
-                  if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                  } else if (document.webkitExitFullscreen) {
-                    document.webkitExitFullscreen();
-                  } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen();
-                  }
-                } catch (e) {
-                  console.log("ye");
-                } finally {
-                  setisFullscreen(false);
-                  // Exit fullscreen mode
-                }
+              } else if (document.exitFullscreen) {
+                document.exitFullscreen();
+              } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+              } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
               }
             }}
             inset
           >
             Toggle Fullscreen
           </MenubarItem>
-          <MenubarSeparator />
           <MenubarItem
             className="cursor-pointer"
             onClick={() => {
               console.log("cliked");
-              const divElement = document.getElementById("kiri");
-              if (divElement) {
-                divElement.setAttribute("data-panel-size", "0");
-                divElement.setAttribute("size", "0");
-                divElement.style.flex = "0 1 0px";
-                divElement.style.overflow = "hidden";
+              const leftElement = document.getElementById("kiri");
+              if (leftElement) {
+                if (leftElement.style.flex == "0 1 0px") {
+                  leftElement.style.flex = "32.9 1 0px";
+                } else {
+                  leftElement.setAttribute("data-panel-size", "0");
+                  leftElement.setAttribute("size", "0");
+                  leftElement.style.flex = "0 1 0px";
+                  leftElement.style.overflow = "hidden";
+                }
               } else {
                 toast("You are not in chat page!", {
                   action: {
@@ -162,7 +153,7 @@ export function MenubarButton() {
             }}
             inset
           >
-            Hide Sidebar
+            Toggle Sidebar
           </MenubarItem>
         </MenubarContent>
       </MenubarMenu>

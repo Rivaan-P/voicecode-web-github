@@ -36,16 +36,16 @@ const ChatMessage = ({ text, sender }) => {
               {sender === "user" ? (
                 <Avatar>
                   <AvatarImage
-                    src="https://github.com/shadcn.png"
+                    src="
+                    https://avatars.githubusercontent.com/u/69108782?v=4"
                     alt={sender}
                   />
-                  <AvatarFallback>A</AvatarFallback>
+                  <AvatarFallback>U</AvatarFallback>
                 </Avatar>
               ) : (
                 <Avatar>
                   <AvatarImage
-                    src="
-              https://avatars.githubusercontent.com/u/69108782?v=4"
+                    src="https://github.com/shadcn.png"
                     alt={sender}
                   />
                   <AvatarFallback>A</AvatarFallback>

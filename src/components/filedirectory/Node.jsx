@@ -1,4 +1,4 @@
-import { AiFillFolder, AiFillFile } from "react-icons/ai";
+import { AiFillFolder, AiFillFile, AiFillFolderOpen } from "react-icons/ai";
 import { MdArrowRight, MdArrowDropDown, MdEdit } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 
@@ -38,8 +38,10 @@ const Node = ({ node, style, dragHandle, tree }) => {
             <span className="file-folder-icon">
               {CustomIcon ? (
                 <CustomIcon color={iconColor ? iconColor : "#f6cf60"} />
+              ) : node.isOpen ? (
+                <AiFillFolderOpen color="#42a5f5" />
               ) : (
-                <AiFillFolder color="#f6cf60" />
+                <AiFillFolder color="#42a5f5" />
               )}
             </span>
           </>
@@ -84,8 +86,6 @@ const Node = ({ node, style, dragHandle, tree }) => {
 export default Node;
 
 function filterExtension(node, e) {
-  console.log(node.isLeaf);
-
   if (node.isLeaf) {
     if (e.currentTarget.value.includes("html")) {
       node.data.icon = SiHtml5;
