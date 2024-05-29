@@ -25,14 +25,14 @@ export function Resizable() {
     >
       <ResizablePanel id="kiri" defaultSize={50}>
         <ResizablePanelGroup direction="vertical">
-          <ResizablePanel defaultSize={25}>
+          <ResizablePanel defaultSize={50}>
             <FileDirectoryPage />
             {/* <div className="flex h-full items-center justify-center p-6">
               <span className="font-semibold">File Directory UI</span>
             </div> */}
           </ResizablePanel>
           <ResizableHandle withHandle />
-          <ResizablePanel defaultSize={75}>
+          <ResizablePanel defaultSize={50}>
             <BranchingTree />
             {/* <div className="flex h-full items-center justify-center p-6">
               <span className="font-semibold">Prompt Branching UI</span>

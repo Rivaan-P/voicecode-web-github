@@ -170,6 +170,10 @@ body {
   border-radius: 9999px;
 }
 
+::-webkit-scrollbar-corner {
+  background: rgba(0, 0, 0, 0);
+}
+
 .sidebar {
   padding: 20px;
   overflow: scroll;
