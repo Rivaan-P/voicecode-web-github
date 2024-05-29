@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
   return (
     <html className="dark" lang="en">
       <Script src="/register-sw.js" />
-      <body class="h-screen" className={inter.className}>
+      <body className={`h-screen ${inter.className}`}>
         <Navbar />
         {children}
         <Toaster />

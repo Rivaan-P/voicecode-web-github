@@ -1,9 +1,6 @@
-"use client";
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import conversationData from "./branchingTree.data";
-import useResizeObserver from "use-resize-observer";
-// import "./BranchingTree.css";
 
 const BranchingTree = () => {
   const svgRef = useRef();
@@ -52,7 +49,7 @@ const BranchingTree = () => {
     const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove();
 
-    const g = svg.append("g").attr("transform", "translate(0, 50)");
+    const g = svg.append("g").attr("transform", "translate(-50, 50)");
 
     g.append("g")
       .selectAll("line")
