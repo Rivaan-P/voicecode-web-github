@@ -6,16 +6,15 @@ const BranchingTree = () => {
   const svgRef = useRef();
   const [currentNode, setCurrentNode] = useState(null);
   const [treeData, setTreeData] = useState(null);
+  //i need to store the conversation "history" ...still figuring out how that will look like
+  const [conversation, setConversation] = useState(conversationData);
 
   const buildTree = (nodes) => {
     const root = nodes.find((node) => node.parentID === null);
-    root.children = nodes.filter((node) => node.parentID === root.index);
-
     const addChildren = (node) => {
       node.children = nodes.filter((n) => n.parentID === node.index);
       node.children.forEach(addChildren);
     };
-
     addChildren(root);
     return root;
   };
@@ -36,7 +35,7 @@ const BranchingTree = () => {
       user: data.user,
       ai: data.ai,
       parentID: data.parentID,
-      children: [],
+      children: []
     }));
 
     const rootNode = buildTree(nodes);
