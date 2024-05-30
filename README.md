@@ -28,6 +28,29 @@ Voice-Activated Code Generation, Debugging, and Visualization for Seamless Progr
 
 </p><br>
 
+# Strucutre
+
+```
+$PROJECT_ROOT
+├───src
+|   ├───app
+|   │   ├───api
+|   │   │   └───chat        // for the gemini chat api
+|   │   ├───chat            // chat page
+|   │   │   └───settings
+|   │   ├───login
+|   |   └───page.js         // main page
+|   ├───components
+|   │   ├───branchingtree
+|   |   ├───chatui
+|   │   ├───filedirectory
+|   │   ├───navbar          // logo, navMenu, MenuBar
+|   │   ├───ui              // shadcn library
+|   │   └───Resizable.jsx   // for the /chat resizable
+|   ├───hooks               // hooks for shortcut keyboard
+|   └───lib                 // shadcn utils
+```
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
