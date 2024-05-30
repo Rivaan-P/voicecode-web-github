@@ -3,7 +3,7 @@
 import { Input } from "@/components/ui/input";
 import { Separator } from "./ui/separator";
 import { Textarea } from "@/components/ui/textarea";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Toggle } from "@/components/ui/toggle";
 import { Button } from "@/components/ui/button";
 
@@ -13,14 +13,24 @@ import { AutosizeTextarea } from "@/components/ui/autosize-textarea";
 
 import ChatMessage from "./ChatMessage";
 import { Mic, Send } from "lucide-react";
+import { Spinner } from "./ui/spinner";
 
-const ChatDialog = () => {
-  const {
+const ChatDialog = ({ dataTree }) => {
+  let {
     messages: messagesAI,
     input,
     handleInputChange: handleInputChangeAI,
     handleSubmit: handleSubmitAI,
+    setMessages: setMessagesAI,
+    isLoading,
+    reload,
+    stop,
   } = useChat();
+
+  useEffect(() => {
+    setMessagesAI(dataTree);
+  }, [dataTree]);
+
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
 
@@ -47,7 +57,9 @@ const ChatDialog = () => {
 
     //   setInputValue("");
     // }
+
     handleSubmitAI(e);
+    console.log(messagesAI);
     const inputcet = document.getElementById("inputchet");
     const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
       window.HTMLTextAreaElement.prototype,
@@ -64,6 +76,7 @@ const ChatDialog = () => {
         {messagesAI.map((m) => (
           <ChatMessage key={m.id} text={m.content} sender={m.role} />
         ))}
+        {isLoading ? <Spinner /> : null}
       </div>
       <Separator className="my-4" />
       <form className="flex gap-4 items-center" onSubmit={handleSubmit}>
@@ -85,6 +98,11 @@ const ChatDialog = () => {
           <Button onClick={() => {}} type="submit" variant="outline">
             <Send />
           </Button>
+          {isLoading ? (
+            <Button onClick={stop} type="submit" variant="outline">
+              Stop
+            </Button>
+          ) : null}
         </div>
       </form>
     </div>

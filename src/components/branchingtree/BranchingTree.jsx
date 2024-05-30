@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import conversationData from "./branchingTree.data";
 
-const BranchingTree = () => {
+const BranchingTree = ({ onClickTree }) => {
   const svgRef = useRef();
   const [currentNode, setCurrentNode] = useState(null);
   const [treeData, setTreeData] = useState(null);
@@ -73,6 +73,9 @@ const BranchingTree = () => {
       .attr("transform", (d) => `translate(${d.x},${d.y})`)
       .on("click", (event, d) => {
         setCurrentNode(d.data.index);
+        // console.log(collectData(d));
+
+        onClickTree(collectData(d));
       });
 
     node
@@ -92,7 +95,7 @@ const BranchingTree = () => {
 
   return (
     <div className=" mapFrame">
-      <svg ref={svgRef} width={"500px"} height={"500px"}></svg>
+      <svg ref={svgRef} width={"400px"} height={"500px"}></svg>
       <div className="branch-info">
         {currentNode && (
           <p>
@@ -104,5 +107,35 @@ const BranchingTree = () => {
     </div>
   );
 };
+
+function collectData(node) {
+  let result = [];
+
+  // Function to recursively traverse the object
+  function traverse(node) {
+    if (node) {
+      // Traverse the parent first (to ensure data from the highest parent is collected first)
+      if (node.parent) {
+        traverse(node.parent);
+      }
+      // Collect the current node's ai and user data
+      result.push({
+        content: node.data.user,
+        role: "user",
+        createdAt: new Date("2024-05-30T01:48:18.000Z"),
+        id: "YLaOeA4",
+      });
+      result.push({
+        content: node.data.ai,
+        role: "assistant",
+        createdAt: new Date("2024-05-30T01:48:19.000Z"),
+        id: "YLaOeA5",
+      });
+    }
+  }
+
+  traverse(node);
+  return result;
+}
 
 export default BranchingTree;
