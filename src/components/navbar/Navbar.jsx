@@ -69,7 +69,6 @@ export default function Navbar() {
                 onClick={() => {
                   const auth = getAuth();
                   const user = auth.currentUser;
-                  console.log(user);
 
                   if (user) {
                     // User is signed in.

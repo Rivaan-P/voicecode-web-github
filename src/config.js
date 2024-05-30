@@ -25,5 +25,3 @@ export const clientConfig = {
   databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
 };
-
-console.log(process.env.NEXT_PUBLIC_FIREBASE_API_KEY);

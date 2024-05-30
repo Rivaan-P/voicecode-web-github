@@ -1,4 +1,4 @@
-import ChatDialog from "@/components/DialogChat";
+import ChatDialog from "@/components/chatui/DialogChat";
 import Navbar from "@/components/navbar/Navbar";
 import { Resizable } from "@/components/Resizable";
 

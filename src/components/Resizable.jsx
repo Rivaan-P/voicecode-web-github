@@ -5,7 +5,7 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 
-import ChatDialog from "./DialogChat";
+import ChatDialog from "./chatui/DialogChat";
 import useKeyboardShortcut from "@/hooks/useKeyboardShortcut";
 import FileDirectoryPage from "./filedirectory/FileDirectoryPage";
 import BranchingTree from "./branchingtree/BranchingTree";
@@ -39,16 +39,14 @@ export function Resizable() {
           </ResizablePanel>
           <ResizableHandle withHandle />
           <ResizablePanel defaultSize={50}>
+            {/* BRANCHING TREE >>> */}
             <BranchingTree onClickTree={handleClickTree} />
-            {/* <div className="flex h-full items-center justify-center p-6">
-              <span className="font-semibold">Prompt Branching UI</span>
-            </div> */}
           </ResizablePanel>
         </ResizablePanelGroup>
       </ResizablePanel>
       {/*  */}
       <ResizableHandle withHandle />
-      {/*  */}
+      {/* CHAT UI >>>  */}
       <ResizablePanel defaultSize={60}>
         <div className="app-container">
           <ChatDialog dataTree={clickTree} />

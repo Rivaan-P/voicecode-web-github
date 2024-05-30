@@ -1,7 +1,7 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { Separator } from "./ui/separator";
+import { Separator } from "../ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useRef, useState } from "react";
 import { Toggle } from "@/components/ui/toggle";
@@ -13,7 +13,7 @@ import { AutosizeTextarea } from "@/components/ui/autosize-textarea";
 
 import ChatMessage from "./ChatMessage";
 import { Mic, Send } from "lucide-react";
-import { Spinner } from "./ui/spinner";
+import { Spinner } from "../ui/spinner";
 
 const ChatDialog = ({ dataTree }) => {
   let {
