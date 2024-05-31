@@ -1,8 +1,8 @@
 # Frontend UI Theme
 
-accent-color=
-background=
-dark-grey=
-light-grey=
+accent-color=#42A5F5
+background=#2e3440
+dark-grey=#3b4252
+light-grey=#434c5e
 
-*When decided, reference in frontend css*
+*(tmp: Polar Night - Nord Theme) When decided, reference in frontend css*
