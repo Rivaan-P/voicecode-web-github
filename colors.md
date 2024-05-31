@@ -3,19 +3,27 @@
 ### Color Palette
 
 #### Accent Color
-<div style="background-color: #42A5F5; width: 100px; height: 30px; border: 1px solid #000;"></div>
+<svg width="100" height="30">
+  <rect width="100" height="30" style="fill:#42A5F5;" />
+</svg>
 `#42A5F5`
 
 #### Background
-<div style="background-color: #2e3440; width: 100px; height: 30px; border: 1px solid #000;"></div>
+<svg width="100" height="30">
+  <rect width="100" height="30" style="fill:#2e3440;" />
+</svg>
 `#2e3440`
 
 #### Dark Grey
-<div style="background-color: #3b4252; width: 100px; height: 30px; border: 1px solid #000;"></div>
+<svg width="100" height="30">
+  <rect width="100" height="30" style="fill:#3b4252;" />
+</svg>
 `#3b4252`
 
 #### Light Grey
-<div style="background-color: #434c5e; width: 100px; height: 30px; border: 1px solid #000;"></div>
+<svg width="100" height="30">
+  <rect width="100" height="30" style="fill:#434c5e;" />
+</svg>
 `#434c5e`
 
 *(tmp: Polar Night - Nord Theme) When decided, reference in frontend css*
