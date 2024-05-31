@@ -35,10 +35,6 @@ const Arborist = () => {
   const [dataTree, setDataTree] = useState(data);
   const treeRef = useRef(null);
 
-  // useEffect(() => {
-  //   console.log(dataTree);
-  // }, [dataTree]);
-
   const onRename = ({ id, name }) => {
     const node = treeRef.current.get(id);
     if (node) {

@@ -7,16 +7,17 @@ import { notFound } from "next/navigation";
 import { clientConfig, serverConfig } from "@/config";
 
 export default async function Chat() {
-  const tokens = await getTokens(cookies(), {
-    apiKey: clientConfig.apiKey,
-    cookieName: serverConfig.cookieName,
-    cookieSignatureKeys: serverConfig.cookieSignatureKeys,
-    serviceAccount: serverConfig.serviceAccount,
-  });
+  // for api coockies
+  // const tokens = await getTokens(cookies(), {
+  //   apiKey: clientConfig.apiKey,
+  //   cookieName: serverConfig.cookieName,
+  //   cookieSignatureKeys: serverConfig.cookieSignatureKeys,
+  //   serviceAccount: serverConfig.serviceAccount,
+  // });
 
-  if (!tokens) {
-    notFound();
-  }
+  // if (!tokens) {
+  //   notFound();
+  // }
 
   return <Resizable />;
 }

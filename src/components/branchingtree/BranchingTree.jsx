@@ -35,7 +35,7 @@ const BranchingTree = ({ onClickTree }) => {
       user: data.user,
       ai: data.ai,
       parentID: data.parentID,
-      children: []
+      children: [],
     }));
 
     const rootNode = buildTree(nodes);
@@ -48,7 +48,7 @@ const BranchingTree = ({ onClickTree }) => {
     const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove();
 
-    const g = svg.append("g").attr("transform", "translate(-50, 50)");
+    const g = svg.append("g").attr("transform", "translate(-60, 50)");
 
     g.append("g")
       .selectAll("line")
@@ -94,7 +94,7 @@ const BranchingTree = ({ onClickTree }) => {
 
   return (
     <div className=" mapFrame">
-      <svg ref={svgRef} width={"400px"} height={"500px"}></svg>
+      <svg ref={svgRef} width={"350px"} height={"500px"}></svg>
       <div className="branch-info">
         {currentNode && (
           <p>
