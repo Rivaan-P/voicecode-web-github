@@ -13,6 +13,16 @@ import { useState } from "react";
 
 export function Resizable() {
   const [clickTree, setClickTree] = useState("");
+
+  if (global?.window !== undefined) {
+    let nameRandom = localStorage.getItem("nameRandom");
+
+    if (!nameRandom) {
+      nameRandom = Math.random().toString(20).substr(2, 6);
+      localStorage.setItem("nameRandom", nameRandom);
+    }
+  }
+
   const handleClickTree = (newTree) => {
     setClickTree(newTree);
   };

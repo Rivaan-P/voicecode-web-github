@@ -1,3 +1,4 @@
+"use client";
 import { Resizable } from "@/components/Resizable";
 import React from "react";
 

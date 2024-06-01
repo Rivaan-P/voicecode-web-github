@@ -38,6 +38,7 @@ import { useTheme } from "next-themes";
 
 const ChatDialog = ({ dataTree }) => {
   const { setTheme, theme } = useTheme();
+  const nameRandom = localStorage.getItem("nameRandom");
 
   const {
     messages: messagesAI,
@@ -98,7 +99,12 @@ const ChatDialog = ({ dataTree }) => {
       <div className="chat-window">
         <div className="chat-messages">
           {messagesAI.map((m) => (
-            <ChatMessage key={m.id} text={m.content} sender={m.role} />
+            <ChatMessage
+              key={m.id}
+              text={m.content}
+              nameRandom={nameRandom}
+              sender={m.role}
+            />
           ))}
           {isLoading ? <Spinner /> : null}
         </div>

@@ -21,8 +21,22 @@ import {
   ContextMenuSubTrigger,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
+import { getAuth } from "firebase/auth";
+import { RandomAvatar } from "react-random-avatars";
 
-const ChatMessage = ({ text, sender }) => {
+const ChatMessage = ({ text, sender, nameRandom }) => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  // console.log(nameRandom);
+
+  // if (user) {
+  //   // User is signed in.
+  //   // console.log(user);
+  //   setUserProfile(user.user.photoURL);
+  // } else {
+  //   setUserProfile("");
+  // }
   return (
     <ContextMenu>
       <ContextMenuTrigger>
@@ -35,11 +49,12 @@ const ChatMessage = ({ text, sender }) => {
             >
               {sender === "user" ? (
                 <Avatar>
-                  <AvatarImage
-                    src="
-                    https://avatars.githubusercontent.com/u/69108782?v=4"
-                    alt={sender}
-                  />
+                  {user ? (
+                    <AvatarImage src={user.photoURL} alt={sender} />
+                  ) : (
+                    // <RandomAvatar name={name} size={40} />
+                    <RandomAvatar name={nameRandom} />
+                  )}
                   <AvatarFallback>U</AvatarFallback>
                 </Avatar>
               ) : (
