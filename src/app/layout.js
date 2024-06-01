@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import { Toaster } from "@/components/ui/sonner";
 import Script from "next/script";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +19,16 @@ export default function RootLayout({ children }) {
     <html className="dark" lang="en">
       <Script src="/register-sw.js" />
       <body className={`h-screen ${inter.className}`}>
-        <Navbar />
-        {children}
-        <Toaster />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          {children}
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

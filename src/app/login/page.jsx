@@ -14,11 +14,16 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
+  signInWithPopup,
+  GoogleAuthProvider,
+  GithubAuthProvider,
 } from "firebase/auth";
 import { app } from "@/firebase";
 import { useRouter } from "next/navigation";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+import { FaGoogle, FaGithub } from "react-icons/fa";
 
 export default function Login() {
   return (
@@ -96,6 +101,42 @@ function LoginPage() {
     }
   }
 
+  const SignInWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth(app);
+    try {
+      await signInWithPopup(auth, provider);
+      router.push("/chat");
+      toast("Login Succesful", {
+        action: {
+          label: "Close",
+          onClick: () => "",
+        },
+      });
+    } catch (e) {
+      console.log(e);
+      setError(e.message);
+    }
+  };
+
+  const SignInWithGithub = async () => {
+    const provider = new GithubAuthProvider();
+    const auth = getAuth(app);
+    try {
+      await signInWithPopup(auth, provider);
+      router.push("/chat");
+      toast("Login Succesful", {
+        action: {
+          label: "Close",
+          onClick: () => "",
+        },
+      });
+    } catch (e) {
+      console.log(e);
+      setError(e.message);
+    }
+  };
+
   return (
     <div className="mx-auto grid w-[350px] gap-6">
       <div className="grid gap-2 text-center">
@@ -135,9 +176,30 @@ function LoginPage() {
           <Button type="submit" className="w-full">
             Login
           </Button>
-          <Button variant="outline" className="w-full">
-            Login with Google
-          </Button>
+        </div>
+        <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
+
+        <div className="flex flex-col space-y-4">
+          <button
+            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+            onClick={SignInWithGoogle}
+          >
+            <FaGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
+            <span className="text-neutral-700 dark:text-neutral-300 text-sm">
+              Google
+            </span>
+            <BottomGradient />
+          </button>
+          <button
+            onClick={SignInWithGithub}
+            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+          >
+            <FaGithub className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
+            <span className="text-neutral-700 dark:text-neutral-300 text-sm">
+              GitHub
+            </span>
+            <BottomGradient />
+          </button>
         </div>
       </form>
       <div className="mt-4 text-center text-sm">
@@ -166,6 +228,42 @@ function SignUpPage() {
   const [confirmation, setConfirmation] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+
+  const SignInWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth(app);
+    try {
+      await signInWithPopup(auth, provider);
+      router.push("/chat");
+      toast("Login Succesful", {
+        action: {
+          label: "Close",
+          onClick: () => "",
+        },
+      });
+    } catch (e) {
+      console.log(e);
+      setError(e.message);
+    }
+  };
+
+  const SignInWithGithub = async () => {
+    const provider = new GithubAuthProvider();
+    const auth = getAuth(app);
+    try {
+      await signInWithPopup(auth, provider);
+      router.push("/chat");
+      toast("Login Succesful", {
+        action: {
+          label: "Close",
+          onClick: () => "",
+        },
+      });
+    } catch (e) {
+      console.log(e);
+      setError(e.message);
+    }
+  };
 
   async function handleSubmitSignUp(event) {
     event.preventDefault();
@@ -253,9 +351,6 @@ function SignUpPage() {
           <div className="grid gap-2">
             <div className="flex items-center">
               <Label htmlFor="password">Password</Label>
-              <Link href="#" className="ml-auto inline-block text-sm underline">
-                Forgot your password?
-              </Link>
             </div>
             <Input
               value={password}
@@ -269,9 +364,30 @@ function SignUpPage() {
           <Button type="submit" className="w-full">
             Sign Up
           </Button>
-          <Button variant="outline" className="w-full">
-            Sign Up with Google
-          </Button>
+        </div>
+        <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
+
+        <div className="flex flex-col space-y-4">
+          <button
+            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+            onClick={SignInWithGoogle}
+          >
+            <FaGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
+            <span className="text-neutral-700 dark:text-neutral-300 text-sm">
+              Google
+            </span>
+            <BottomGradient />
+          </button>
+          <button
+            onClick={SignInWithGoogle}
+            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+          >
+            <FaGithub className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
+            <span className="text-neutral-700 dark:text-neutral-300 text-sm">
+              GitHub
+            </span>
+            <BottomGradient />
+          </button>
         </div>
       </form>
       <div className="mt-4 text-center text-sm">
@@ -292,3 +408,12 @@ function SignUpPage() {
     </div>
   );
 }
+
+const BottomGradient = () => {
+  return (
+    <>
+      <span className="group-hover/btn:opacity-100 block transition duration-500 opacity-0 absolute h-px w-full -bottom-px inset-x-0 bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
+      <span className="group-hover/btn:opacity-100 blur-sm block transition duration-500 opacity-0 absolute h-px w-1/2 mx-auto -bottom-px inset-x-10 bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
+    </>
+  );
+};

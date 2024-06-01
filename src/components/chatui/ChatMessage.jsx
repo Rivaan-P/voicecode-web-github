@@ -67,12 +67,12 @@ const ChatMessage = ({ text, sender }) => {
               >
                 <div
                   className={` grid grid-col-1 gap-2.5 [&_>_*]:min-w-0 chat-message flex items-center items-start gap-2 ${
-                    sender === "user" ? "user text-right" : "assistant "
+                    sender === "user" ? "user text-left" : "assistant "
                   }`}
                 >
                   {/* <span className="text-gray-800 text-base leading-relaxed">{text}</span> */}
 
-                  <ReactMarkdown className="textmd text-base leading-relaxed">
+                  <ReactMarkdown className="textmd text-base leading-relaxed ">
                     {text}
                   </ReactMarkdown>
                 </div>

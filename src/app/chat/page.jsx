@@ -1,10 +1,10 @@
 import { Resizable } from "@/components/Resizable";
 import React from "react";
 
-import { getTokens } from "next-firebase-auth-edge";
-import { cookies } from "next/headers";
-import { notFound } from "next/navigation";
-import { clientConfig, serverConfig } from "@/config";
+// import { getTokens } from "next-firebase-auth-edge";
+// import { cookies } from "next/headers";
+// import { notFound } from "next/navigation";
+// import { clientConfig, serverConfig } from "@/config";
 
 export default async function Chat() {
   // for api coockies

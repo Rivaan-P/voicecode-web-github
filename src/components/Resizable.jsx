@@ -22,7 +22,6 @@ export function Resizable() {
     if (button) {
       button.click();
     }
-    // console.log("pressed");
   });
   return (
     <ResizablePanelGroup
@@ -31,26 +30,21 @@ export function Resizable() {
     >
       <ResizablePanel id="kiri" defaultSize={40}>
         <ResizablePanelGroup direction="vertical">
+          {/* FILE DIRECTORY >>> */}
           <ResizablePanel defaultSize={50}>
             <FileDirectoryPage />
-            {/* <div className="flex h-full items-center justify-center p-6">
-              <span className="font-semibold">File Directory UI</span>
-            </div> */}
           </ResizablePanel>
           <ResizableHandle withHandle />
+          {/* BRANCHING TREE >>> */}
           <ResizablePanel defaultSize={50}>
-            {/* BRANCHING TREE >>> */}
             <BranchingTree onClickTree={handleClickTree} />
           </ResizablePanel>
         </ResizablePanelGroup>
       </ResizablePanel>
-      {/*  */}
       <ResizableHandle withHandle />
       {/* CHAT UI >>>  */}
       <ResizablePanel defaultSize={60}>
-        <div className="app-container">
-          <ChatDialog dataTree={clickTree} />
-        </div>
+        <ChatDialog dataTree={clickTree} />
       </ResizablePanel>
     </ResizablePanelGroup>
   );

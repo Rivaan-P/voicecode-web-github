@@ -47,7 +47,7 @@ const Arborist = () => {
 
   const createFileFolder = (
     <>
-      <button
+      {/* <button
         onClick={() => treeRef.current.createInternal()}
         title="New Folder..."
       >
@@ -55,7 +55,7 @@ const Arborist = () => {
       </button>
       <button onClick={() => treeRef.current.createLeaf()} title="New File...">
         <AiOutlineFileAdd />
-      </button>
+      </button> */}
       <button
         onClick={() => inputDirectoryTree.current.click()}
         title="Upload Directory..."
