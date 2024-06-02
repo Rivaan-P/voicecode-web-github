@@ -3,11 +3,11 @@
 import { Input } from "@/components/ui/input";
 import { Separator } from "../ui/separator";
 import { Textarea } from "@/components/ui/textarea";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { Toggle } from "@/components/ui/toggle";
 import { Button } from "@/components/ui/button";
 
-import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowBack, IoIosAdd } from "react-icons/io";
 
 import { useChat } from "ai/react";
 
@@ -38,6 +38,8 @@ import { useTheme } from "next-themes";
 
 const ChatDialog = ({ dataTree }) => {
   const { setTheme, theme } = useTheme();
+  const [_, startTransition] = useTransition();
+
   const nameRandom = localStorage.getItem("nameRandom");
 
   const {
@@ -141,69 +143,88 @@ const ChatDialog = ({ dataTree }) => {
               <IoIosArrowBack size={20} />
             </div>
           </SheetTrigger>
-          <SheetContent className="w-[200px] sm:w-[300px]">
-            <SheetHeader>
-              <SheetTitle>Chat Sessions</SheetTitle>
-              <SheetDescription>
-                <div className="mb-2">
+          <SheetContent
+            side="right"
+            className="inset-y-0 flex h-auto w-[300px] flex-col p-0"
+          >
+            <div className={cn("flex", "h-full flex-col dark:bg-zinc-950")}>
+              <div className="flex flex-col h-full">
+                <div className="flex items-center justify-between p-4">
+                  <h4 className="text-sm font-medium">Chat Sessions</h4>
+                </div>
+                <div className="mb-2 px-2">
                   <Link
                     href="/"
                     className={cn(
                       buttonVariants({ variant: "outline" }),
-                      "h-10 w-full text-white justify-start bg-zinc-200/40 px-4 shadow-none transition-colors "
+                      "h-10 w-full justify-start bg-zinc-50 px-4 shadow-none transition-colors hover:bg-zinc-200/40 dark:bg-zinc-900 dark:hover:bg-zinc-300/10"
                     )}
                   >
                     {/* <IconPlus className="-translate-x-2 stroke-2" /> */}
-                    New Chat
+                    <IoIosAdd size={20} className="-translate-x-2 stroke-2" />
+                    New Session
                   </Link>
                 </div>
-              </SheetDescription>
-              <Separator className="my-2" />
-            </SheetHeader>
-            {/* <div className="mt-2 mb-2">
-            <Button className="w-full text-left " variant="ghost">
-              Traverse Object Recursively
-            </Button>
-            <Button className="w-full text-left " variant="ghost">
-              General
-            </Button>
-            <Button className="w-full text-left " variant="ghost">
-              General
-            </Button>
-          </div> */}
-            <div className="h-[80vh] flex flex-1 flex-col overflow-hidden">
-              <div className="flex-1 overflow-auto">
-                <div className="space-y-2 px-2">
-                  {/* <SidebarItems chats={chats} /> */}
-                  <Button className="w-full  " variant="ghost">
-                    <div className="text-left ">General</div>
-                  </Button>
+                {/* <React.Suspense
+        fallback={
+          <div className="flex flex-col flex-1 px-4 space-y-4 overflow-auto">
+            {Array.from({ length: 10 }).map((_, i) => (
+              <div
+                key={i}
+                className="w-full h-6 rounded-md shrink-0 animate-pulse bg-zinc-200 dark:bg-zinc-800"
+              />
+            ))}
+          </div>
+        }
+      >
+        <SidebarList userId={userId} />
+      </React.Suspense> */}
+                <div className="flex flex-1 flex-col overflow-hidden">
+                  <div className="flex-1 overflow-auto">
+                    {/* {chats?.length ? (
+          <div className="space-y-2 px-2">
+            <SidebarItems chats={chats} />
+          </div>
+        ) : (
+          <div className="p-8 text-center">
+            <p className="text-sm text-muted-foreground">No chat history</p>
+          </div>
+        )} */}
+                    <div className="p-8 text-center">
+                      <p className="text-sm text-muted-foreground">
+                        No chat history
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between p-4">
+                    {/* {theme === "dark" ? (
+                      <Button onClick={() => setTheme("light")}>
+                        <Sun size={20} />
+                      </Button>
+                    ) : (
+                      <Button onClick={() => setTheme("dark")}>
+                        <Moon size={20} />
+                      </Button>
+                    )} */}
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => {
+                        startTransition(() => {
+                          setTheme(theme === "light" ? "dark" : "light");
+                        });
+                      }}
+                    >
+                      {!theme ? null : theme === "dark" ? (
+                        <Moon className="transition-all" />
+                      ) : (
+                        <Sun className="transition-all" />
+                      )}
+                      <span className="sr-only">Toggle theme</span>
+                    </Button>
+                    {/* <ClearHistory clearChats={clearChats} isEnabled={chats?.length > 0} /> */}
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center justify-between p-4">
-                {/* <ThemeToggle /> */}
-                {theme === "dark" ? (
-                  <Button onClick={() => setTheme("light")}>
-                    <Sun size={20} />
-                  </Button>
-                ) : (
-                  <Button onClick={() => setTheme("dark")}>
-                    <Moon size={20} />
-                  </Button>
-                )}
-                {/* <Button>
-
-                </Button>
-                <Toggle
-                  onClick={() => {
-                    console.log(theme);
-                    setTheme("light");
-                  }}
-                >
-                  <CiDark size={20} />
-                </Toggle> */}
-                <div>clearHistory</div>
-                {/* <ClearHistory clearChats={clearChats} isEnabled={chats?.length > 0} /> */}
               </div>
             </div>
           </SheetContent>

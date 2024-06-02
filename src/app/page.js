@@ -1,3 +1,4 @@
+"use client";
 import { MainGemini } from "@/components/main";
 
 export default function Home() {
