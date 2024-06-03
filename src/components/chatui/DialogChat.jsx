@@ -35,6 +35,7 @@ import { buttonVariants } from "@/components/ui/button";
 
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import ThemeSwitcherButton from "../themeSwitcher";
 
 const ChatDialog = ({ dataTree }) => {
   const { setTheme, theme } = useTheme();
@@ -98,8 +99,8 @@ const ChatDialog = ({ dataTree }) => {
 
   return (
     <div className="app-container">
-      <div className="chat-window">
-        <div className="chat-messages">
+      <div className="chat-window pt-[2rem]">
+        <div className="chat-messages  pb-40">
           {messagesAI.map((m) => (
             <ChatMessage
               key={m.id}
@@ -110,38 +111,55 @@ const ChatDialog = ({ dataTree }) => {
           ))}
           {isLoading ? <Spinner /> : null}
         </div>
-        <Separator className="my-4" />
-        <form className="flex gap-4 items-center" onSubmit={handleSubmit}>
-          <AutosizeTextarea
-            id="inputchet"
-            className="min-h-[60px] w-full bg-transparent  resize-none px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
-            rows={1}
-            name="message"
-            autoComplete="off"
-            value={input}
-            onChange={handleInputChangeAI}
-            onKeyDown={handleKeyDown}
-            placeholder="Tip: Use Ctrl + Space as a voice shortcut."
-          />
-          <div className="flex  items-center gap-2">
-            <Toggle id="micButton" aria-label="Toggle bold">
-              <Mic />
-            </Toggle>
-            <Button onClick={() => {}} type="submit" variant="outline">
-              <Send />
-            </Button>
-            {isLoading ? (
-              <Button onClick={stop} type="submit" variant="outline">
-                Stop
+        <div className="w-[inherit] max-w-[-webkit-fill-available] space-y-4 border-t dark:bg-black  bg-white px-4 py-2 shadow-lg sm:rounded-t-xl sm:border md:py-4 fixed bottom-0">
+          <form
+            className=" flex pr-3 pl-3 gap-4 items-center"
+            onSubmit={handleSubmit}
+          >
+            <AutosizeTextarea
+              maxHeight={150}
+              id="inputchet"
+              className="min-h-[60px] w-full bg-transparent  resize-none px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
+              rows={1}
+              name="message"
+              autoComplete="off"
+              value={input}
+              onChange={handleInputChangeAI}
+              onKeyDown={handleKeyDown}
+              placeholder="Use Ctrl + Space as a voice shortcut."
+            />
+            <div className="flex  items-center gap-2">
+              <Toggle id="micButton" aria-label="Toggle bold">
+                <Mic />
+              </Toggle>
+              <Button
+                onClick={() => {}}
+                disabled={!input}
+                type="submit"
+                variant="outline"
+              >
+                <Send />
               </Button>
-            ) : null}
-          </div>
-        </form>
+              {isLoading ? (
+                <Button onClick={stop} type="submit" variant="outline">
+                  Stop
+                </Button>
+              ) : null}
+            </div>
+          </form>
+        </div>
+        {/* <Separator className="my-4" /> */}
         <Sheet>
           <SheetTrigger>
-            <div className="fixed right-0 top-1/2 z-40 mr-2">
-              <IoIosArrowBack size={20} />
-            </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="fixed right-0 top-1/2 z-40 mr-1"
+            >
+              <div className="">
+                <IoIosArrowBack size={15} />
+              </div>
+            </Button>
           </SheetTrigger>
           <SheetContent
             side="right"
@@ -206,7 +224,7 @@ const ChatDialog = ({ dataTree }) => {
                         <Moon size={20} />
                       </Button>
                     )} */}
-                    <Button
+                    {/* <Button
                       variant="ghost"
                       size="icon"
                       onClick={() => {
@@ -221,7 +239,8 @@ const ChatDialog = ({ dataTree }) => {
                         <Sun className="transition-all" />
                       )}
                       <span className="sr-only">Toggle theme</span>
-                    </Button>
+                    </Button> */}
+                    <ThemeSwitcherButton />
                     {/* <ClearHistory clearChats={clearChats} isEnabled={chats?.length > 0} /> */}
                   </div>
                 </div>

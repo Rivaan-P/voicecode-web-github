@@ -29,6 +29,7 @@ import { memo } from "react";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import CodeBlock from "../ui/codeblock";
+import { Separator } from "../ui/separator";
 
 const ChatMessage = ({ text, sender, nameRandom }) => {
   const auth = getAuth();
@@ -98,7 +99,7 @@ const ChatMessage = ({ text, sender, nameRandom }) => {
                 <div
                   className={` grid grid-col-1 gap-2.5 [&_>_*]:min-w-0 chat-message flex items-center items-start gap-2 ${
                     sender === "user"
-                      ? "user text-left cursor-pointer"
+                      ? "user text-left cursor-pointer bg-slate-300 dark:bg-zinc-800"
                       : "assistant "
                   }`}
                 >
@@ -159,10 +160,12 @@ const ChatMessage = ({ text, sender, nameRandom }) => {
                   {/* </ReactMarkdown> */}
                 </div>
               </TooltipTrigger>
+
               <TooltipContent>
                 <div>copy</div>
               </TooltipContent>
             </div>
+            <Separator className="my-4" />
           </Tooltip>
         </TooltipProvider>
       </ContextMenuTrigger>
