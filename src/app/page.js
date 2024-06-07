@@ -1,5 +1,5 @@
-import { MainGemini } from "@/components/main";
-import { TypewriterEffectSmoothDemo } from "@/components/mainTypeWriter";
+import { MainGemini } from "@/components/mainPage/mainGemini";
+import { TypewriterEffectSmoothDemo } from "@/components/mainPage/mainTypeWriter";
 
 export default function Home() {
   return (

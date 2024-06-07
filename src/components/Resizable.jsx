@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/resizable";
 
 import ChatDialog from "./chatui/DialogChat";
-import useKeyboardShortcut from "@/hooks/useKeyboardShortcut";
+import useKeyboardShortcut from "@/lib/hooks/useKeyboardShortcut";
 import FileDirectoryPage from "./filedirectory/FileDirectoryPage";
 import BranchingTree from "./branchingtree/BranchingTree";
 import { useEffect, useState } from "react";

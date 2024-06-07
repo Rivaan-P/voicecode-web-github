@@ -9,6 +9,9 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
+  metadataBase: process.env.VERCEL_URL
+    ? new URL(`https://${process.env.VERCEL_URL}`)
+    : undefined,
   title: {
     default: "Voicecode",
     template: `%s - Voicecode`,
