@@ -1,50 +1,89 @@
 [
   {
     "index": 0,
-    "user": "Hello!",
-    "ai": "```python\ndef vigenere_cipher(key, text):\n    def shift_char(c, k):\n        # Only shift alphabetic characters\n        if c.isalpha():\n            # Determine if character is upper or lower case\n            offset = ord('A') if c.isupper() else ord('a')\n            # Shift character based on key\n            shifted = (ord(c) - offset + k) % 26 + offset\n            return chr(shifted)\n        else:\n            return c\n    \n    encrypted_text = []\n    key_length = len(key)\n    key_indices = [ord(k.upper()) - ord('A') for k in key]  # Normalize key to 0-25\n\n    for i, char in enumerate(text):\n        key_index = key_indices[i % key_length]  # Cycle through key\n        encrypted_char = shift_char(char, key_index)\n        encrypted_text.append(encrypted_char)\n    \n    return ''.join(encrypted_text)\n\n# Example usage:\nkey = \"KEY\"\ntext = \"HELLO WORLD\"\nencrypted = vigenere_cipher(key, text)\nprint(\"Encrypted text:\", encrypted)",
-    "parentID": null
+    "content": [
+      {
+        "user": "Hello!",
+        "ai": "```python\ndef vigenere_cipher(key, text):\n    def shift_char(c, k):\n        # Only shift alphabetic characters\n        if c.isalpha():\n            # Determine if character is upper or lower case\n            offset = ord('A') if c.isupper() else ord('a')\n            # Shift character based on key\n            shifted = (ord(c) - offset + k) % 26 + offset\n            return chr(shifted)\n        else:\n            return c\n    \n    encrypted_text = []\n    key_length = len(key)\n    key_indices = [ord(k.upper()) - ord('A') for k in key]  # Normalize key to 0-25\n\n    for i, char in enumerate(text):\n        key_index = key_indices[i % key_length]  # Cycle through key\n        encrypted_char = shift_char(char, key_index)\n        encrypted_text.append(encrypted_char)\n    \n    return ''.join(encrypted_text)\n\n# Example usage:\nkey = \"KEY\"\ntext = \"HELLO WORLD\"\nencrypted = vigenere_cipher(key, text)\nprint(\"Encrypted text:\", encrypted)"
+      }
+    ],
+
+    "parentID": "null"
   },
   {
     "index": 1,
-    "user": "Great! Can you get me some example code I could run with that function, to encrypt \"hi, i think we should meet up secretly tomorrow\" with the key \"seecret\"?",
-    "ai": "key = \"seecret\"\ntext = \"hi, i think we should meet up secretly tomorrow\"\nencrypted = vigenere_cipher(key, text)\nprint(\"Encrypted text:\", encrypted)",
+    "content": [
+      {
+        "user": "Great! Can you get me some example code I could run with that function, to encrypt \"hi, i think we should meet up secretly tomorrow\" with the key \"seecret\"?",
+        "ai": "key = \"seecret\"\ntext = \"hi, i think we should meet up secretly tomorrow\"\nencrypted = vigenere_cipher(key, text)\nprint(\"Encrypted text:\", encrypted)"
+      },
+      {
+        "user": "Great! love you",
+        "ai": "your welcome"
+      }
+    ],
+
     "parentID": 0
   },
   {
     "index": 2,
-    "user": "Sounds good! what makes this type of cypher good?",
-    "ai": "Vigenere cyphers aren't very secure cyphers, as frequency analysis can be used to defeat it relatively easily. You might want to look into RSA instead.",
+    "content": [
+      {
+        "user": "Sounds good! what makes this type of cypher good?",
+        "ai": "Vigenere cyphers aren't very secure cyphers, as frequency analysis can be used to defeat it relatively easily. You might want to look into RSA instead."
+      }
+    ],
+
     "parentID": 1
   },
   {
     "index": 3,
-    "user": "Sounds good!I know that this type of cypher is not that great, but list its strengths anyways.",
-    "ai": "Although Vigenere cyphers aren't very secure cyphers, as frequency analysis can be used to defeat them, it is still a powerful algorithm that's much stronger with encryption than a caesar's cypher. Also, a vigenere cypher is much more difficult to bruteforce, requiring sophisticated techniques instead.",
+    "content": [
+      {
+        "user": "Sounds good!I know that this type of cypher is not that great, but list its strengths anyways.",
+        "ai": "Although Vigenere cyphers aren't very secure cyphers, as frequency analysis can be used to defeat them, it is still a powerful algorithm that's much stronger with encryption than a caesar's cypher. Also, a vigenere cypher is much more difficult to bruteforce, requiring sophisticated techniques instead."
+      }
+    ],
     "parentID": 1
   },
   {
     "index": 4,
-    "user": "Why is a caesar's cypher weaker? Should the one that Julius Caesar invented be really good?",
-    "ai": "Caesar's cypher, although revoutionary for its time, is a quite simple algorithm that can be easily beaten by bruteforcing all 26 possible combinations. Plus, it's incredibly weak to frequency analysis.",
+    "content": [
+      {
+        "user": "Why is a caesar's cypher weaker? Should the one that Julius Caesar invented be really good?",
+        "ai": "Caesar's cypher, although revoutionary for its time, is a quite simple algorithm that can be easily beaten by bruteforcing all 26 possible combinations. Plus, it's incredibly weak to frequency analysis."
+      }
+    ],
     "parentID": 3
   },
   {
     "index": 5,
-    "user": "Thanks!",
-    "ai": "No problem! Let me know if you'd like any more assistance with implementing cryptography algorithms.",
+    "content": [
+      {
+        "user": "Thanks!",
+        "ai": "No problem! Let me know if you'd like any more assistance with implementing cryptography algorithms."
+      }
+    ],
     "parentID": 4
   },
   {
     "index": 6,
-    "user": "Yeah, what's your name?",
-    "ai": "I'm Gemini AI, powering Voicecode.",
+    "content": [
+      {
+        "user": "Yeah, what's your name?",
+        "ai": "I'm Gemini AI, powering Voicecode."
+      }
+    ],
     "parentID": 5
   },
   {
     "index": 7,
-    "user": "So can you make me like a visualization or something?",
-    "ai": "Yep! Just ask.",
+    "content": [
+      {
+        "user": "So can you make me like a visualization or something?",
+        "ai": "Yep! Just ask."
+      }
+    ],
     "parentID": 6
   }
 ]

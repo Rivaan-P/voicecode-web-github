@@ -13,7 +13,7 @@ function useIsMounted() {
   return mounted;
 }
 
-function useThemeTransition() {
+export function useThemeTransition() {
   const { theme, setTheme } = useTheme();
 
   const toggleTheme = useCallback(() => {
@@ -62,7 +62,6 @@ export function ThemeSwitcherButton() {
   const mounted = useIsMounted();
 
   if (!mounted) return null;
-
   return (
     <button
       className="rounded-xl bg-neutral-200 p-4 shadow-lg dark:bg-neutral-800"

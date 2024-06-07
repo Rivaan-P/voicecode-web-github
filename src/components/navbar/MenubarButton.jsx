@@ -19,8 +19,10 @@ import {
 } from "@/components/ui/menubar";
 import { getAuth } from "firebase/auth";
 import { toast } from "sonner";
+import ThemeSwitcherButton, { useThemeTransition } from "../themeSwitcher";
 
 export function MenubarButton() {
+  const { toggleTheme, theme } = useThemeTransition();
   const [isUser, setIsUser] = React.useState("");
 
   const auth = getAuth();
@@ -93,7 +95,9 @@ export function MenubarButton() {
       <MenubarMenu>
         <MenubarTrigger>View</MenubarTrigger>
         <MenubarContent>
-          <MenubarCheckboxItem>Always Show Bookmarks Bar</MenubarCheckboxItem>
+          <MenubarItem onClick={toggleTheme} className="cursor-pointer" inset>
+            Change Theme
+          </MenubarItem>
           <MenubarCheckboxItem checked>
             Always Show Full URLs
           </MenubarCheckboxItem>
@@ -105,6 +109,7 @@ export function MenubarButton() {
             Force Reload <MenubarShortcut>⇧⌘R</MenubarShortcut>
           </MenubarItem>
           <MenubarSeparator />
+
           <MenubarItem
             className="cursor-pointer"
             onClick={() => {

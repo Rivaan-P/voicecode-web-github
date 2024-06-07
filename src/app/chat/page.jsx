@@ -1,4 +1,3 @@
-"use client";
 import { Resizable } from "@/components/Resizable";
 import React from "react";
 
@@ -6,6 +5,10 @@ import React from "react";
 // import { cookies } from "next/headers";
 // import { notFound } from "next/navigation";
 // import { clientConfig, serverConfig } from "@/config";
+
+export const metadata = {
+  title: "Chat",
+};
 
 export default async function Chat() {
   // for api coockies

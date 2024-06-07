@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { AiFillFolder, AiFillFile, AiFillFolderOpen } from "react-icons/ai";
 import { MdArrowRight, MdArrowDropDown, MdEdit } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
@@ -7,7 +8,6 @@ import { SiHtml5, SiJavascript, SiCss3, SiMarkdown } from "react-icons/si";
 const Node = ({ node, style, dragHandle, tree }) => {
   const CustomIcon = node.data.icon;
   const iconColor = node.data.iconColor;
-
   // console.log(node, tree);
   return (
     <div

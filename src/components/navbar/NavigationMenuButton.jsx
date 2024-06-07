@@ -12,6 +12,8 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 
+import { FiArrowUpRight } from "react-icons/fi";
+
 import { components } from "./NavbarMenu.data";
 
 import { cn } from "@/lib/utils";
@@ -79,7 +81,7 @@ export function NavigationMenuButton() {
         <NavigationMenuItem>
           <Link href="/chat" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Chat
+              Chat <FiArrowUpRight />
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>

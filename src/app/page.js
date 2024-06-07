@@ -1,5 +1,5 @@
-"use client";
 import { MainGemini } from "@/components/main";
+import { TypewriterEffectSmoothDemo } from "@/components/mainTypeWriter";
 
 export default function Home() {
   return (
@@ -8,7 +8,7 @@ export default function Home() {
       {/* <div class="app-container">
         <ChatDialog />
       </div> */}
-      <div>hai</div>
+      <TypewriterEffectSmoothDemo />
     </div>
   );
 }

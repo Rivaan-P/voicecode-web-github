@@ -179,18 +179,29 @@
   background: rgba(0, 0, 0, 0);
 }
 
+.sidebar:focus,
+.sidebar:active,
+.sidebar:hover {
+  overflow: scroll;
+}
+
 .sidebar {
   padding: 20px;
-  overflow: scroll;
+  overflow: hidden;
   height: 100%;
   width: auto;
 }
 
+.mapFrame:focus,
+.mapFrame:active,
+.mapFrame:hover {
+  overflow: scroll;
+}
 .mapFrame {
   padding: 20px;
-  overflow: scroll;
   height: 100%;
   width: auto;
+  overflow: hidden;
 }
 
 .node-container,
