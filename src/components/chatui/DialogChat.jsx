@@ -22,7 +22,7 @@ import { buttonVariants } from "@/components/ui/button";
 
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import ThemeSwitcherButton from "../themeSwitcher";
+import ThemeSwitcherButton from "../sessionsui/themeSwitcher";
 
 const ChatDialog = ({ dataTree, currentBranch, setCurrentBranch }) => {
   const { setTheme, theme } = useTheme();
@@ -113,6 +113,9 @@ const ChatDialog = ({ dataTree, currentBranch, setCurrentBranch }) => {
             className=" flex pr-3 pl-3 gap-4 items-center"
             onSubmit={handleSubmit}
           >
+            <Toggle id="micButton" aria-label="Toggle bold">
+              <Mic />
+            </Toggle>
             <AutosizeTextarea
               maxHeight={150}
               id="inputchet"
@@ -126,9 +129,6 @@ const ChatDialog = ({ dataTree, currentBranch, setCurrentBranch }) => {
               placeholder="Use Ctrl + Space as a voice shortcut."
             />
             <div className="flex  items-center gap-2">
-              <Toggle id="micButton" aria-label="Toggle bold">
-                <Mic />
-              </Toggle>
               <Button
                 onClick={() => {}}
                 disabled={!input}

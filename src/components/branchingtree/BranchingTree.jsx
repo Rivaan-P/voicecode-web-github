@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
-import conversationDatas from "./branchingTree.data";
+// import conversationDatas from "./branchingTree.data";
 import { database } from "@/firebase";
 import { ref, onValue, set } from "firebase/database";
 import { Button } from "../ui/button";

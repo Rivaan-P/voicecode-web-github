@@ -19,7 +19,9 @@ import {
 } from "@/components/ui/menubar";
 import { getAuth } from "firebase/auth";
 import { toast } from "sonner";
-import ThemeSwitcherButton, { useThemeTransition } from "../themeSwitcher";
+import ThemeSwitcherButton, {
+  useThemeTransition,
+} from "../sessionsui/themeSwitcher";
 
 export function MenubarButton() {
   const { toggleTheme, theme } = useThemeTransition();
@@ -190,16 +192,12 @@ export function MenubarButton() {
             )}
           </MenubarRadioGroup>
           <MenubarSeparator />
-          {!isUser ? (
-            ""
-          ) : (
-            <Link href="/chat/settings">
-              {" "}
-              <MenubarItem className="cursor-pointer" inset>
-                Settings
-              </MenubarItem>{" "}
-            </Link>
-          )}
+          <Link href="/chat/settings">
+            {" "}
+            <MenubarItem className="cursor-pointer" inset>
+              Settings
+            </MenubarItem>{" "}
+          </Link>
           <MenubarSeparator />
           {isUser ? (
             <MenubarItem

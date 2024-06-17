@@ -17,7 +17,10 @@ Voice-Activated Code Generation, Debugging, and Visualization for Seamless Progr
 
 <br>
 <p align="center">
-<img width="720px" src="https://github.com/Rivaan-P/Voicecode-web/assets/69108782/2104bca4-b012-4737-a66d-78344f833900" alt="allymotion"></img>
+
+[demo][DEMO]
+
+<!-- <img width="720px" src="https://github.com/Rivaan-P/Voicecode-web/assets/69108782/2104bca4-b012-4737-a66d-78344f833900" alt="allymotion"></img> -->
 </p><br>
 
 ### TEAM
@@ -87,3 +90,5 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+[DEMO]: https://github.com/Rivaan-P/Voicecode-web/assets/69108782/2104bca4-b012-4737-a66d-78344f833900

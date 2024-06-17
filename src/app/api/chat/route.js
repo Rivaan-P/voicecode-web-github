@@ -58,20 +58,3 @@ export async function POST(req) {
     return new Response("Internal Server Error", { status: 500 });
   }
 }
-
-function processContent(content) {
-  const outputArray = [];
-  let currentObject = {};
-
-  content.forEach((item) => {
-    if (item.role === "user") {
-      currentObject = { user: item.content };
-    } else if (item.role === "assistant") {
-      currentObject.ai = item.content;
-      outputArray.push(currentObject);
-      currentObject = {};
-    }
-  });
-
-  return outputArray;
-}
