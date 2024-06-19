@@ -1,32 +1,49 @@
 // 1: Uncontrolled Tree
 import { useEffect, useRef, useState } from "react";
-
 import { Tree } from "react-arborist";
 import { data } from "./fileDirectory.data";
-
 import Node from "./Node";
-
 import { TbFolderPlus } from "react-icons/tb";
 import { AiOutlineFileAdd } from "react-icons/ai";
-
 import { SiHtml5, SiJavascript, SiCss3, SiMarkdown } from "react-icons/si";
 import { MdOutlineDriveFolderUpload } from "react-icons/md";
 import useResizeObserver from "use-resize-observer";
-
 import { IoLogoJavascript } from "react-icons/io";
 
+const validExtensions = ['.txt', '.py', '.java', '.c', '.h','.js','.jsx','.json'];
+
 const Arborist = () => {
-  const handleDirectoryUpload = (event) => {
+  const handleDirectoryUpload = async (event) => {
     const files = event.target.files;
     const paths = [];
+    const filesData = {};
 
     for (let i = 0; i < files.length; i++) {
-      paths.push(files[i].webkitRelativePath);
+      const file = files[i];
+      const path = file.webkitRelativePath;
+      paths.push(path);
+      const ext = path.slice(path.lastIndexOf('.'));
+      if (validExtensions.includes(ext)) {
+        filesData[path] = await readFile(file);
+      }
     }
 
-    const tree = buildTree(paths);
+    const tree = buildTree(paths, filesData);
     const json = convertTreeToJson(tree);
     setDataTree(json);
+    console.log(filesData)
+    const plainText = JSON.stringify(json, null, 2); // Stringify with pretty printing
+
+    console.log(plainText); 
+  };
+
+  const readFile = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => resolve(e.target.result);
+      reader.onerror = (e) => reject(e);
+      reader.readAsText(file);
+    });
   };
 
   const inputDirectoryTree = useRef(null);
@@ -47,15 +64,6 @@ const Arborist = () => {
 
   const createFileFolder = (
     <>
-      {/* <button
-        onClick={() => treeRef.current.createInternal()}
-        title="New Folder..."
-      >
-        <TbFolderPlus />
-      </button>
-      <button onClick={() => treeRef.current.createLeaf()} title="New File...">
-        <AiOutlineFileAdd />
-      </button> */}
       <button
         onClick={() => inputDirectoryTree.current.click()}
         title="Upload Directory..."
@@ -91,7 +99,6 @@ const Arborist = () => {
         indent={24}
         rowHeight={32}
         width={width}
-        // openByDefault={false}
         searchTerm={term}
         searchMatch={(node, term) =>
           node.data.name.toLowerCase().includes(term.toLowerCase())
@@ -113,14 +120,17 @@ const getFileIcon = (fileName) => {
   }
 };
 
-const buildTree = (paths) => {
+const buildTree = (paths, filesData) => {
   const tree = {};
   paths.forEach((path) => {
     const parts = path.split("/");
     let current = tree;
     parts.forEach((part, index) => {
       if (!current[part]) {
-        current[part] = { id: null, name: part, children: {} };
+        current[part] = { id: null, name: part, children: {}, content: null };
+      }
+      if (index === parts.length - 1 && filesData[path]) {
+        current[part].content = filesData[path];
       }
       current = current[part].children;
     });
@@ -150,6 +160,7 @@ const convertTreeToJson = (tree) => {
       ...(icon && { icon }),
       ...(iconColor && { iconColor }),
       ...(children.length > 0 && { children }),
+      ...(node.content && { content: node.content }),  // Add content if it exists
     };
   };
 
