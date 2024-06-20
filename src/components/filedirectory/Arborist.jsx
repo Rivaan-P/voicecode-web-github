@@ -20,7 +20,7 @@ const Arborist = () => {
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      const path = file.webkitRelativePath;
+      const path = file.webkitRelativePath || file.name;
       paths.push(path);
       const ext = path.slice(path.lastIndexOf('.'));
       if (validExtensions.includes(ext)) {
@@ -31,10 +31,10 @@ const Arborist = () => {
     const tree = buildTree(paths, filesData);
     const json = convertTreeToJson(tree);
     setDataTree(json);
-    console.log(filesData)
+    console.log(filesData);
     const plainText = JSON.stringify(json, null, 2); // Stringify with pretty printing
 
-    console.log(plainText); 
+    console.log(plainText);
   };
 
   const readFile = (file) => {
@@ -127,7 +127,7 @@ const buildTree = (paths, filesData) => {
     let current = tree;
     parts.forEach((part, index) => {
       if (!current[part]) {
-        current[part] = { id: null, name: part, children: {}, content: null };
+        current[part] = { id: null, name: part, children: {}, fullPath: path, content: null };
       }
       if (index === parts.length - 1 && filesData[path]) {
         current[part].content = filesData[path];
@@ -159,6 +159,7 @@ const convertTreeToJson = (tree) => {
       name: node.name,
       ...(icon && { icon }),
       ...(iconColor && { iconColor }),
+      fullPath: node.fullPath,
       ...(children.length > 0 && { children }),
       ...(node.content && { content: node.content }),  // Add content if it exists
     };

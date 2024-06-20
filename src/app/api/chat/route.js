@@ -3,6 +3,8 @@ import { database } from "@/firebase";
 import { google } from "@ai-sdk/google";
 import { StreamingTextResponse, convertToCoreMessages, streamText } from "ai";
 import { ref, set, push, update, get } from "firebase/database";
+import { parseCommands, executeCommands } from './commandParser';
+import path from 'path';
 
 export const maxDuration = 30;
 
@@ -17,34 +19,25 @@ export async function POST(req) {
       model: google("models/gemini-1.5-flash"),
       messages: convertToCoreMessages(messages),
       async onFinish({ text, toolCalls, toolResults, usage, finishReason }) {
-        // console.log([...messages, { role: "assistant", content: text }]);
-
         const dbRef = ref(database, namaUnik + "/" + currentBranch);
 
         // Fetch the existing array
         const snapshot = await get(dbRef);
-        console.log("snapshot", snapshot);
-        const existingArray = snapshot.val() || []; // If no data exists, start with an empty array
-        console.log("existingArray", existingArray);
+        const existingArray = snapshot.val() || { content: [] };
 
-        // Modify the array locally by adding a new item
-        // const newItem = { user: "newUser" };
-        // const updatedArray = [...existingArray, newItem];
-
-        const userMessage = messages.findLast(
-          (message) => message.role === "user"
-        );
+        const userMessage = messages.findLast((message) => message.role === "user");
 
         const content = [
           ...existingArray.content,
           { user: userMessage.content, ai: text },
         ];
 
-        console.log("content", content);
-        // console.log("content", content);
-
-        // const outputArray = processContent(content);
-        // console.log("outputObject", outputArray);
+        // Parse and execute file management commands
+        const commands = parseCommands(text);
+        if (commands.length > 0) {
+          const initialDirectory = path.resolve(__dirname, '../../'); // Set your initial directory
+          await executeCommands(commands, initialDirectory);
+        }
 
         // Add new messages to the database
         await update(dbRef, { index: currentBranch, content: content });
